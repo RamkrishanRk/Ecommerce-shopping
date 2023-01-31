@@ -1,0 +1,26 @@
+.data-length {
+  position: absolute;
+  background: #e86414;
+  padding: 0px 4px;
+  border-radius: 50%;
+  top: -5px;
+  right: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #fff;
+}
+.items_img img {
+  width: 300px;
+  height: 300px;
+}
+.iteamsdetails {
+  display: flex;
+}
+.details {
+  margin-left: 2rem;
+}
+.iteamsdetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
