@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import {
   Add_Card,
@@ -90,7 +90,7 @@ const CardsDetails = () => {
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="25"
                                   height="25"
-                                  fill="red"
+                                  fill="#fb641b"
                                   className="bi bi-trash"
                                   viewBox="0 0 16 16"
                                 >
@@ -102,6 +102,10 @@ const CardsDetails = () => {
                                 </svg>
                               </span>
                             </div>
+                            <a class="btn btn-outline-dark btn-sm" href="#">
+                              Procceed to checkout
+                              <i class="fas fa-long-arrow-alt-right ms-2"></i>
+                            </a>
                           </td>
                         </tr>
                       </table>

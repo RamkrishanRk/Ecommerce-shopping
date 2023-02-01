@@ -131,7 +131,7 @@ const Navbar = () => {
                               return (
                                 <>
                                   <tr>
-                                    <th scope="row">
+                                    <th>
                                       <Link to={`/cart/${item?.id}`}>
                                         <img
                                           src={item?.image}
@@ -148,12 +148,7 @@ const Navbar = () => {
                                       <p>Quantity : {item?.qnty}</p>
                                     </td>
                                     <td
-                                      className="mt-5"
-                                      style={{
-                                        color: "red",
-                                        fontSize: 20,
-                                        cursor: "pointer",
-                                      }}
+                                      className="delete-section"
                                       onClick={() => dlt(item?.id)}
                                     >
                                       <svg
@@ -176,7 +171,7 @@ const Navbar = () => {
                               );
                             })}
                           </tbody>
-                          <p className="text-center">Total :₹{price}</p>
+                          <p className="m-0 mt-2">Total : ₹{price}</p>
                         </table>
                       ) : (
                         <p className="cart-empty">
