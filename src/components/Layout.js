@@ -6,9 +6,13 @@ const Layout = (props) => {
   return (
     <>
       <div className="page-holder">
-        <Navbar />
-        {props.children}
-        <Footer />
+        <div className="header-section">
+          <Navbar />
+        </div>
+        <div className="content-section">{props.children}</div>
+        <div className="footer-section">
+          <Footer />
+        </div>
       </div>
     </>
   );

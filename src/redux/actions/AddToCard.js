@@ -1,4 +1,4 @@
-import { ADD_CART, RMV_CART } from "./type";
+import { ADD_CART, RMV_CART, DECREMENT_ITEMS } from "./type";
 
 export const Add_Card = (item) => {
   return {
@@ -7,9 +7,16 @@ export const Add_Card = (item) => {
   };
 };
 
-export const DLT = (id) => {
+export const DeleteItems = (id) => {
   return {
     type: RMV_CART,
     payload: id,
+  };
+};
+
+export const DecrementItems = (data) => {
+  return {
+    type: DECREMENT_ITEMS,
+    payload: data,
   };
 };

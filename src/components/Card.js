@@ -9,23 +9,21 @@ const Card = () => {
   const [data, setData] = useState(products);
 
   const addToCart = (e) => {
-    console.log(e);
     dispatch(Add_Card(e));
   };
   return (
     <Layout>
-      <div className="container">
-        <div className="row d-flex justify-content-center align-items-center">
+      <div className="container px-4 px-lg-5 mt-5 main-cart-section">
+        <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
           {data.map((item, index) => {
             return (
               <>
-                <div className="mx-2 mt-4 mb-4" style={{ width: "22rem" }}>
+                <div className="mt-4 mb-4 col-md-3">
                   <div className="card-next-img" key={index}>
                     <img
                       src={item.image}
                       className="card-img-top"
                       alt="image-tag"
-                      style={{ width: "100%", height: "250px" }}
                     />
                   </div>
                   <div className="card-body">

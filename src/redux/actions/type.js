@@ -1,3 +1,3 @@
 export const ADD_CART = "ADD_CART";
-// export const REMOVE_CART = "REMOVE_CART";
+export const DECREMENT_ITEMS = "DECREMENT_ITEMS";
 export const RMV_CART = "RMV_CART";
