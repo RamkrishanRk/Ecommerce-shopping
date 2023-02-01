@@ -88,9 +88,9 @@ const CardsDetails = () => {
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
-                                  width="25"
-                                  height="25"
-                                  fill="#fb641b"
+                                  width="24"
+                                  height="24"
+                                  fill="red"
                                   className="bi bi-trash"
                                   viewBox="0 0 16 16"
                                 >
@@ -102,10 +102,9 @@ const CardsDetails = () => {
                                 </svg>
                               </span>
                             </div>
-                            <a class="btn btn-outline-dark btn-sm" href="#">
+                            <button className="proccess-section">
                               Procceed to checkout
-                              <i class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </a>
+                            </button>
                           </td>
                         </tr>
                       </table>

@@ -85,8 +85,8 @@
   color: red;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 3rem !important;
 }
+
 .proccess-section {
   background: #fb641b;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
@@ -109,4 +109,13 @@
   z-index: 9999;
   background: url("http://html.lionode.com/darklook/images/loder.gif") center
     no-repeat #000;
+}
+.cart-items-number p {
+  margin: 0;
+  font-size: 16px;
+  padding: 4px;
+}
+.cart-view-data {
+  display: flex;
+  border-bottom: 1px solid #dee2e6;
 }
