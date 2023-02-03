@@ -18,9 +18,7 @@ const Layout = (props) => {
           <Navbar />
         </div>
         <div className="content-section">{props.children}</div>
-        <div className="footer-section">
-          <Footer />
-        </div>
+        <div className="footer-section">{/* <Footer /> */}</div>
       </div>
     </>
   );
