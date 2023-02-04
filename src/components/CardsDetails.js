@@ -222,27 +222,29 @@ const CardsDetails = () => {
                               </svg>
                             </span>
                           </li>
-                          <button
-                            className="proccess-section"
-                            onClick={handleCheckout}
-                          >
-                            Procceed to checkout
-                            <svg
-                              width="35"
-                              height="35"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
+                          <Link to="/checkout">
+                            <button
+                              className="proccess-section"
+                              // onClick={handleCheckout}
                             >
-                              <path
-                                d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
-                                stroke="#fff"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
+                              Procceed to checkout
+                              <svg
+                                width="35"
+                                height="35"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
+                                  stroke="#fff"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </button>
+                          </Link>
                         </ul>
                       </div>
                     </div>

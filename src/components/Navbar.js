@@ -173,7 +173,20 @@ const Navbar = () => {
                               </>
                             );
                           })}
-                          <p className="m-0 mt-2">Total : ₹{price}</p>
+                          <div className="btn-cart-view">
+                            <p className="m-0 mt-2">Total : ₹{price}</p>
+                            <div className="view-checkout-section">
+                              <Link to="/view-cart" className="view-cart-btn">
+                                View Cart
+                              </Link>
+                              <Link
+                                to="/checkout"
+                                className="view-cart-checkout"
+                              >
+                                Checkout
+                              </Link>
+                            </div>
+                          </div>
                         </table>
                       ) : (
                         <p className="cart-empty">
