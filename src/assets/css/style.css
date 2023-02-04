@@ -203,3 +203,18 @@
   background-color: #dd620f;
   color: #fff;
 }
+.add-to-cart-section {
+  background-color: #fd6600;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  padding: 0.3rem;
+}
+.animsition-link {
+  color: #000;
+  text-decoration: none;
+}
+.animsition-link:hover {
+  text-decoration: underline;
+  color: #dd620f;
+}

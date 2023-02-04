@@ -7,8 +7,8 @@ import {
   DecrementItems,
   DeleteItems,
 } from "../redux/actions/AddToCard";
-import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
+// import axios from "axios";
+// import { loadStripe } from "@stripe/stripe-js";
 
 const CardsDetails = () => {
   const { id } = useParams();
@@ -40,35 +40,35 @@ const CardsDetails = () => {
     dispatch(DecrementItems(item));
   };
 
-  const handleCheckout = async (e) => {
-    e.preventDefault();
-    const line_items = user.map((item) => {
-      return {
-        qnty: item.qnty,
-        price_data: {
-          currency: "usd",
-          unit_amount: item.price * 100,
-          product_data: {
-            name: item.title,
-            description: item.description,
-            images: [item.image],
-          },
-        },
-      };
-    });
-    const response = await axios.post(
-      `http://localhost:4000/create-checkout-session`,
-      line_items
-    );
-    const stripe = await loadStripe(`${process.env.REACT_APP_TITLE}`);
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: response?.data?.id,
-    });
+  // const handleCheckout = async (e) => {
+  //   e.preventDefault();
+  //   const line_items = user.map((item) => {
+  //     return {
+  //       qnty: item.qnty,
+  //       price_data: {
+  //         currency: "usd",
+  //         unit_amount: item.price * 100,
+  //         product_data: {
+  //           name: item.title,
+  //           description: item.description,
+  //           images: [item.image],
+  //         },
+  //       },
+  //     };
+  //   });
+  //   const response = await axios.post(
+  //     `http://localhost:4000/create-checkout-session`,
+  //     line_items
+  //   );
+  //   const stripe = await loadStripe(`${process.env.REACT_APP_TITLE}`);
+  //   const { error } = await stripe.redirectToCheckout({
+  //     sessionId: response?.data?.id,
+  //   });
 
-    if (error) {
-      console.log(error);
-    }
-  };
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>

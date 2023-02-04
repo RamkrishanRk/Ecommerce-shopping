@@ -31,7 +31,7 @@ const Card = () => {
                     <p className="card-text text-success pb-2">₹{item.price}</p>
                   </div>
                   <button
-                    className="btn btn-primary w-100"
+                    className="add-to-cart-section w-100"
                     onClick={() => addToCart(item)}
                   >
                     Add to cart

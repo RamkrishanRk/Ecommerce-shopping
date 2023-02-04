@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 
 const Checkout = () => {
+  const CheckoutData = useSelector((state) => state?.cartreducer?.carts);
+  const [price, setPrice] = useState(0);
+
+  const priceData = () => {
+    let price = 0;
+    CheckoutData.map((item) => {
+      price = item?.price + price;
+    });
+    setPrice(price);
+  };
+  useEffect(() => {
+    priceData();
+  }, [price]);
   return (
     <>
       <Layout>
@@ -114,18 +128,18 @@ const Checkout = () => {
                       class="btn btn-link text-dark p-0 shadow-0"
                       type="button"
                       data-bs-toggle="collapse"
-                      data-bs-target="#alternateAddress"
+                      href="#alternateAddress"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="alternateAddress"
                     >
                       <div class="form-check">
                         <input
                           class="form-check-input"
-                          id="alternateAddressCheckbox"
+                          id="alternateAddress"
                           type="checkbox"
                         />
-                        <label
-                          class="form-check-label"
-                          for="alternateAddressCheckbox"
-                        >
+                        <label class="form-check-label" for="alternateAddress">
                           Alternate billing address
                         </label>
                       </div>
@@ -168,7 +182,7 @@ const Checkout = () => {
                           class="form-control"
                           type="email"
                           id="email2"
-                          placeholder="e.g. Jason@example.com"
+                          placeholder="Jason@example.com"
                         />
                       </div>
                       <div class="col-lg-6">
@@ -179,7 +193,7 @@ const Checkout = () => {
                           class="form-control"
                           type="tel"
                           id="phone2"
-                          placeholder="e.g. +02 245354745"
+                          placeholder="+02 245354745"
                         />
                       </div>
                       <div class="col-lg-6">
@@ -197,14 +211,11 @@ const Checkout = () => {
                         <label class="form-label" for="countryAlt">
                           Country
                         </label>
-                        <select
-                          class="country"
-                          id="countryAlt"
-                          data-customclass="form-control rounded-0"
-                        >
+                        <select id="countryAlt" class="form-control rounded-0">
                           <option value>Choose your country</option>
                         </select>
                       </div>
+
                       <div class="col-lg-12">
                         <label class="form-label" for="address2">
                           Address line 1
@@ -253,28 +264,29 @@ const Checkout = () => {
               <div class="card border-0 rounded-0 p-lg-4 bg-light">
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Your order</h5>
-                  <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between">
-                      <strong class="small fw-bold">
-                        Red digital smartwatch
-                      </strong>
-                      <span class="text-muted small">$250</span>
-                    </li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between">
-                      <strong class="small fw-bold">
-                        Gray Nike running shoes
-                      </strong>
-                      <span class="text-muted small">$351</span>
-                    </li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between">
-                      <strong class="text-uppercase small fw-bold">
-                        Total
-                      </strong>
-                      <span>$601</span>
-                    </li>
-                  </ul>
+                  {CheckoutData
+                    ? CheckoutData.map((data) => {
+                        return (
+                          <>
+                            <ul class="list-unstyled mb-0">
+                              <li class="d-flex align-items-center justify-content-between">
+                                <strong class="small fw-bold">
+                                  {data.title}
+                                </strong>
+                                <span class="text-muted small">
+                                  ₹{data.price}
+                                </span>
+                              </li>
+                              <li class="border-bottom my-2"></li>
+                            </ul>
+                          </>
+                        );
+                      })
+                    : ""}
+                  <li class="d-flex align-items-center justify-content-between">
+                    <strong class="text-uppercase small fw-bold">Total</strong>
+                    <span>₹{price}</span>
+                  </li>
                 </div>
               </div>
             </div>

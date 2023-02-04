@@ -1,7 +1,43 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
+import {
+  Add_Card,
+  DecrementItems,
+  DeleteItems,
+} from "../redux/actions/AddToCard";
 
 const ViewCart = () => {
+  const viewCarted = useSelector((state) => state?.cartreducer?.carts);
+  const dispatch = useDispatch();
+
+  const [price, setPrice] = useState(0);
+
+  const priceData = () => {
+    let price = 0;
+    viewCarted.map((item) => {
+      price = item?.price * item.qnty + price;
+    });
+    setPrice(price);
+  };
+
+  useEffect(() => {
+    priceData();
+  }, [priceData]);
+  const navigate = useNavigate();
+  const deleteCart = (id) => {
+    dispatch(DeleteItems(id));
+    navigate("/");
+  };
+
+  const addToCart = (e) => {
+    dispatch(Add_Card(e));
+  };
+  const DecrementToCart = (item) => {
+    dispatch(DecrementItems(item));
+  };
+
   return (
     <>
       <Layout>
@@ -31,76 +67,98 @@ const ViewCart = () => {
                     </tr>
                   </thead>
                   <tbody class="border-0">
-                    <tr>
-                      <th class="ps-0 py-3 border-0" scope="row">
-                        <div class="d-flex align-items-center">
-                          <a
-                            class="reset-anchor d-block animsition-link"
-                            href="#"
-                          >
-                            <img
-                              src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-3.4edd674c.jpg"
-                              alt="..."
-                              width="70"
-                            />
-                          </a>
-                          <div class="ms-3">
-                            <strong class="h6">
-                              <a class="reset-anchor animsition-link" href="#">
-                                Apple watch
-                              </a>
-                            </strong>
-                          </div>
-                        </div>
-                      </th>
-                      <td class="p-3 align-middle border-0">
-                        <p class="mb-0 small">$250</p>
-                      </td>
-                      <td class="p-3 align-middle border-0 w-25">
-                        <div class="border d-flex align-items-center justify-content-between px-3">
-                          <span class="small text-uppercase text-gray headings-font-family">
-                            Quantity
-                          </span>
-                          <div class="quantity">
-                            <div class="dec-btn p-0">
-                              <svg
-                                width="24px"
-                                height="24px"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M15 18V6l-6 6z" fill="black" />
-                              </svg>
-                            </div>
-                            <input
-                              class="form-control border-0 shadow-0 p-0"
-                              type="text"
-                              value="1"
-                            />
-                            <div class="inc-btn p-0">
-                              <svg
-                                width="24px"
-                                height="24px"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M9 6v12l6-6z" fill="black" />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-3 align-middle border-0">
-                        <p class="mb-0 small">$250</p>
-                      </td>
-                      <td class="p-3 align-middle border-0">
-                        <a class="reset-anchor" href="#!">
-                          <i class="fas fa-trash-alt small text-muted"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    {viewCarted
+                      ? viewCarted.map((data) => {
+                          return (
+                            <>
+                              <tr>
+                                <th class="ps-0 py-3 border-0" scope="row">
+                                  <div class="d-flex align-items-center">
+                                    <Link
+                                      class="reset-anchor d-block animsition-link"
+                                      to={`/cart/${data.id}`}
+                                    >
+                                      <img
+                                        src={data?.image}
+                                        alt="..."
+                                        width="70"
+                                      />
+                                    </Link>
+                                    <div class="ms-3">
+                                      <strong class="h6">
+                                        <Link
+                                          class="reset-anchor animsition-link"
+                                          to={`/cart/${data.id}`}
+                                        >
+                                          {data?.title}
+                                        </Link>
+                                      </strong>
+                                    </div>
+                                  </div>
+                                </th>
+                                <td class="p-3 align-middle border-0">
+                                  <p class="mb-0 small">₹{data?.price}</p>
+                                </td>
+                                <td class="p-3 align-middle border-0 w-25">
+                                  <div class="border d-flex align-items-center justify-content-between px-3">
+                                    <span class="small text-uppercase text-gray headings-font-family">
+                                      Quantity
+                                    </span>
+                                    <div class="quantity">
+                                      <div
+                                        class="dec-btn p-0"
+                                        onClick={
+                                          data.qnty <= 1
+                                            ? () => deleteCart(data.id)
+                                            : () => DecrementToCart(data)
+                                        }
+                                      >
+                                        <svg
+                                          width="24px"
+                                          height="24px"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M15 18V6l-6 6z"
+                                            fill="black"
+                                          />
+                                        </svg>
+                                      </div>
+                                      {data?.qnty}
+                                      <div
+                                        class="inc-btn p-0"
+                                        onClick={() => addToCart(data)}
+                                      >
+                                        <svg
+                                          width="24px"
+                                          height="24px"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path d="M9 6v12l6-6z" fill="black" />
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td class="p-3 align-middle border-0">
+                                  <p class="mb-0 small">
+                                    ₹{data?.price * data?.qnty}
+                                  </p>
+                                </td>
+                                <td class="p-3 align-middle border-0">
+                                  <a class="reset-anchor" href="#!">
+                                    <i class="fas fa-trash-alt small text-muted"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            </>
+                          );
+                        })
+                      : ""}
                   </tbody>
                 </table>
               </div>
@@ -159,20 +217,20 @@ const ViewCart = () => {
                       <strong class="text-uppercase small font-weight-bold">
                         Subtotal
                       </strong>
-                      <span class="text-muted small">$250</span>
+                      <span class="text-muted small">₹{price}</span>
                     </li>
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between mb-4">
                       <strong class="text-uppercase small font-weight-bold">
                         Total
                       </strong>
-                      <span>$250</span>
+                      <span>₹{price}</span>
                     </li>
                     <li>
                       <form action="#">
-                        <div class="input-group mb-0">
+                        <div class="input-group">
                           <input
-                            class="form-control"
+                            class="form-control mb-3"
                             type="text"
                             placeholder="Enter your coupon"
                           />
