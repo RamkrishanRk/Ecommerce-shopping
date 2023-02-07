@@ -90,28 +90,28 @@ const CardsDetails = () => {
                                   <img
                                     class="w-100"
                                     src={item?.image}
-                                    alt="..."
+                                    alt="image01"
                                   />
                                 </div>
                                 <div class="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
                                     class="w-100"
                                     src={item?.image}
-                                    alt="..."
+                                    alt="image02"
                                   />
                                 </div>
                                 <div class="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
                                     class="w-100"
                                     src={item?.image}
-                                    alt="..."
+                                    alt="image03"
                                   />
                                 </div>
                                 <div class="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
                                     class="w-100"
                                     src={item?.image}
-                                    alt="..."
+                                    alt="image04"
                                   />
                                 </div>
                               </div>
@@ -127,9 +127,14 @@ const CardsDetails = () => {
                                     data-glightbox="Product item 1"
                                   >
                                     <img
-                                      style={{ width: "100%", height: "445px" }}
+                                      style={{
+                                        width: "100%",
+                                        height: "445px",
+                                        objectFit: "cover",
+                                        maxWidth: "100%",
+                                      }}
                                       src={item?.image}
-                                      alt="..."
+                                      alt="image03"
                                     />
                                   </a>
                                 </div>
