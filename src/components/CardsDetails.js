@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
+import Categories from "../pages/Categories";
 import {
   Add_Card,
   DecrementItems,
@@ -74,42 +75,41 @@ const CardsDetails = () => {
     <>
       <Layout>
         <div className="cart-details-page">
-          <h2>SHOPPING CART</h2>
-          <section class="py-5">
+          <section className="py-5">
             {user?.map((item) => {
               return (
                 <>
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="row m-sm-0">
-                          <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
-                            <div class="swiper product-slider-thumbs">
-                              <div class="swiper-wrapper">
-                                <div class="swiper-slide h-auto swiper-thumb-item mb-3">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <div className="row m-sm-0">
+                          <div className="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
+                            <div className="swiper product-slider-thumbs">
+                              <div className="swiper-wrapper">
+                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
-                                    class="w-100"
+                                    className="w-100"
                                     src={item?.image}
                                     alt="image01"
                                   />
                                 </div>
-                                <div class="swiper-slide h-auto swiper-thumb-item mb-3">
+                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
-                                    class="w-100"
+                                    className="w-100"
                                     src={item?.image}
                                     alt="image02"
                                   />
                                 </div>
-                                <div class="swiper-slide h-auto swiper-thumb-item mb-3">
+                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
-                                    class="w-100"
+                                    className="w-100"
                                     src={item?.image}
                                     alt="image03"
                                   />
                                 </div>
-                                <div class="swiper-slide h-auto swiper-thumb-item mb-3">
+                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
                                   <img
-                                    class="w-100"
+                                    className="w-100"
                                     src={item?.image}
                                     alt="image04"
                                   />
@@ -117,12 +117,12 @@ const CardsDetails = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-sm-10 order-1 order-sm-2">
-                            <div class="swiper product-slider">
-                              <div class="swiper-wrapper">
-                                <div class="swiper-slide h-auto">
+                          <div className="col-sm-10 order-1 order-sm-2">
+                            <div className="swiper product-slider">
+                              <div className="swiper-wrapper">
+                                <div className="swiper-slide h-auto">
                                   <a
-                                    class="glightbox product-view"
+                                    className="glightbox product-view"
                                     data-gallery="gallery2"
                                     data-glightbox="Product item 1"
                                   >
@@ -143,22 +143,22 @@ const CardsDetails = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div className="col-lg-6">
                         <h1>{item?.title}</h1>
-                        <p class="text-muted lead">₹{item?.price}</p>
-                        <p class="text-sm mb-4">{item?.description}</p>
-                        <div class="row align-items-stretch mb-4">
-                          <div class="col-sm-5 pr-sm-0">
-                            <div class="border d-flex align-items-center justify-content-between py-1 px-3">
-                              <p class="small text-uppercase text-gray mr-4 no-select m-0">
+                        <p className="text-muted lead">₹{item?.price}</p>
+                        <p className="text-sm mb-4">{item?.description}</p>
+                        <div className="row align-items-stretch mb-4">
+                          <div className="col-sm-5 pr-sm-0">
+                            <div className="border d-flex align-items-center justify-content-between py-1 px-3">
+                              <p className="small text-uppercase text-gray mr-4 no-select m-0">
                                 Quantity
                               </p>
-                              <div class="quantity">
+                              <div className="quantity">
                                 <div
-                                  class="dec-btn p-0"
+                                  className="dec-btn p-0"
                                   onClick={
                                     item.qnty <= 1
-                                      ? () => deleteCart(item.id)
+                                      ? ""
                                       : () => DecrementToCart(item)
                                   }
                                 >
@@ -173,12 +173,12 @@ const CardsDetails = () => {
                                   </svg>
                                 </div>
                                 <input
-                                  class="form-control border-0 shadow-0 p-0 text-center"
+                                  className="form-control border-0 shadow-0 p-0 text-center"
                                   type="text"
                                   value={item?.qnty}
                                 />
                                 <div
-                                  class="inc-btn p-0"
+                                  className="inc-btn p-0"
                                   onClick={() => addToCart(item)}
                                 >
                                   <svg
@@ -195,15 +195,15 @@ const CardsDetails = () => {
                             </div>
                           </div>
                         </div>
-                        <ul class="list-unstyled small d-inline-block">
-                          <li class="px-2 py-2 mb-1">
-                            <strong class="text-uppercase">Total:</strong>
-                            <span class="ms-2 text-muted">
+                        <ul className="list-unstyled small d-inline-block">
+                          <li className="px-2 py-2 mb-1">
+                            <strong className="text-uppercase">Total:</strong>
+                            <span className="ms-2 text-muted">
                               ₹{item?.price * item?.qnty}
                             </span>
                           </li>
-                          <li class="px-2 py-2 mb-1">
-                            <strong class="text-uppercase text-dark">
+                          <li className="px-2 py-2 mb-1">
+                            <strong className="text-uppercase text-dark">
                               Remove :
                             </strong>
                             <span

@@ -6,6 +6,7 @@ import Success from "../src/components/Success";
 import Cencel from "./components/Cencel";
 import Checkout from "./pages/Checkout";
 import ViewCart from "./pages/ViewCart";
+import CartDetail from "./pages/CartDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/cencel" element={<Cencel />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/view-cart" element={<ViewCart />} />
+          <Route path="/detail" element={<CartDetail />} />
         </Routes>
       </BrowserRouter>
     </>

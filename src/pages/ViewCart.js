@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import {
   Add_Card,
@@ -11,20 +11,8 @@ import {
 const ViewCart = () => {
   const viewCarted = useSelector((state) => state?.cartreducer?.carts);
   const dispatch = useDispatch();
-
   const [price, setPrice] = useState(0);
 
-  const priceData = () => {
-    let price = 0;
-    viewCarted.map((item) => {
-      price = item?.price * item.qnty + price;
-    });
-    setPrice(price);
-  };
-
-  useEffect(() => {
-    priceData();
-  }, [priceData]);
   const navigate = useNavigate();
   const deleteCart = (id) => {
     dispatch(DeleteItems(id));
@@ -38,56 +26,130 @@ const ViewCart = () => {
     dispatch(DecrementItems(item));
   };
 
+  const getDiscountPercentage = (quantity, amount) => {
+    var discountPercentage;
+    switch (quantity) {
+      case 1:
+        discountPercentage = 0;
+        break;
+      case 2:
+        discountPercentage = 11;
+        break;
+      case 3:
+        discountPercentage = 12;
+        break;
+      case 4:
+        discountPercentage = 13;
+        break;
+      case 5:
+        discountPercentage = 14;
+        break;
+      default:
+        discountPercentage = 15;
+    }
+    const exactDis = (amount * discountPercentage) / 100;
+    return Math.round(amount * quantity - exactDis);
+  };
+
+  const priceData = () => {
+    let price = 0;
+    viewCarted.map((item) => {
+      price = item?.price * item.qnty + price;
+    });
+    setPrice(price);
+  };
+
+  useEffect(() => {
+    priceData();
+  }, [priceData]);
   return (
     <>
       <Layout>
-        <section class="container py-5">
-          <h2 class="h5 text-uppercase mb-4">Shopping cart</h2>
-          <div class="row">
-            <div class="col-lg-8 mb-4 mb-lg-0">
-              <div class="table-responsive mb-4">
-                <table class="table text-nowrap">
-                  <thead class="bg-light">
+        <section className="container py-5">
+          <div className="py-5 bg-light mb-5">
+            <div className="container">
+              <div className="row px-4 px-lg-5 py-lg-4 align-items-center">
+                <div className="col-lg-6">
+                  <h1 className="h2 text-uppercase mb-0">Cart</h1>
+                </div>
+                <div className="col-lg-6 text-lg-end">
+                  <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
+                      <li className="breadcrumb-item">
+                        <Link className="text-dark" to="/">
+                          Home
+                        </Link>
+                      </li>
+                      <li
+                        className="breadcrumb-item active"
+                        aria-current="page"
+                      >
+                        Cart
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h2 className="h5 text-uppercase mb-4">Shopping cart</h2>
+          <div className="row">
+            <div className="col-lg-8 mb-4 mb-lg-0">
+              <div className="table-responsive mb-4">
+                <table className="table text-nowrap">
+                  <thead className="bg-light">
                     <tr>
-                      <th class="border-0 p-3" scope="col">
-                        <strong class="text-sm text-uppercase">Product</strong>
+                      <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase">
+                          Product
+                        </strong>
                       </th>
-                      <th class="border-0 p-3" scope="col">
-                        <strong class="text-sm text-uppercase">Price</strong>
+                      <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase">
+                          Price
+                        </strong>
                       </th>
-                      <th class="border-0 p-3" scope="col">
-                        <strong class="text-sm text-uppercase">Quantity</strong>
+                      <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase">
+                          Quantity
+                        </strong>
                       </th>
-                      <th class="border-0 p-3" scope="col">
-                        <strong class="text-sm text-uppercase">Total</strong>
+                      <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase">
+                          Total
+                        </strong>
                       </th>
-                      <th class="border-0 p-3" scope="col">
-                        <strong class="text-sm text-uppercase"></strong>
+                      <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase"></strong>
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="border-0">
-                    {viewCarted
-                      ? viewCarted.map((data) => {
+                  <tbody className="border-0">
+                    {viewCarted.length ? (
+                      viewCarted ? (
+                        viewCarted.map((data) => {
                           return (
                             <>
                               <tr>
-                                <th class="ps-0 py-3 border-0" scope="row">
-                                  <div class="d-flex align-items-center">
+                                <th className="ps-0 py-3 border-0" scope="row">
+                                  <div className="d-flex align-items-center">
                                     <Link
-                                      class="reset-anchor d-block animsition-link"
+                                      className="reset-anchor d-block animsition-link"
                                       to={`/cart/${data.id}`}
                                     >
                                       <img
                                         src={data?.image}
                                         alt="..."
-                                        width="70"
+                                        style={{
+                                          width: "4rem",
+                                          height: "4rem",
+                                        }}
                                       />
                                     </Link>
-                                    <div class="ms-3">
-                                      <strong class="h6">
+                                    <div className="ms-3">
+                                      <strong className="h6">
                                         <Link
-                                          class="reset-anchor animsition-link"
+                                          className="reset-anchor animsition-link"
                                           to={`/cart/${data.id}`}
                                         >
                                           {data?.title}
@@ -96,20 +158,20 @@ const ViewCart = () => {
                                     </div>
                                   </div>
                                 </th>
-                                <td class="p-3 align-middle border-0">
-                                  <p class="mb-0 small">₹{data?.price}</p>
+                                <td className="p-3 align-middle border-0">
+                                  <p className="mb-0 small">₹{data?.price}</p>
                                 </td>
-                                <td class="p-3 align-middle border-0 w-25">
-                                  <div class="border d-flex align-items-center justify-content-between px-3">
-                                    <span class="small text-uppercase text-gray headings-font-family">
+                                <td className="p-3 align-middle border-0 w-25">
+                                  <div className="border d-flex align-items-center justify-content-between px-3">
+                                    <span className="small text-uppercase text-gray headings-font-family">
                                       Quantity
                                     </span>
-                                    <div class="quantity">
+                                    <div className="quantity">
                                       <div
-                                        class="dec-btn p-0"
+                                        className="dec-btn p-0"
                                         onClick={
                                           data.qnty <= 1
-                                            ? () => deleteCart(data.id)
+                                            ? ""
                                             : () => DecrementToCart(data)
                                         }
                                       >
@@ -128,7 +190,7 @@ const ViewCart = () => {
                                       </div>
                                       {data?.qnty}
                                       <div
-                                        class="inc-btn p-0"
+                                        className="inc-btn p-0"
                                         onClick={() => addToCart(data)}
                                       >
                                         <svg
@@ -144,29 +206,58 @@ const ViewCart = () => {
                                     </div>
                                   </div>
                                 </td>
-                                <td class="p-3 align-middle border-0">
-                                  <p class="mb-0 small">
-                                    ₹{data?.price * data?.qnty}
+                                <td className="p-3 align-middle border-0">
+                                  <p className="mb-0 small">
+                                    {/* ₹{data?.price * data?.qnty} */}₹
+                                    {getDiscountPercentage(
+                                      data?.qnty,
+                                      data?.price
+                                    )}
                                   </p>
                                 </td>
-                                <td class="p-3 align-middle border-0">
-                                  <a class="reset-anchor" href="#!">
-                                    <i class="fas fa-trash-alt small text-muted"></i>
-                                  </a>
+                                <td className="p-3 align-middle border-0">
+                                  <Link
+                                    className="reset-anchor"
+                                    to="/view-cart"
+                                    onClick={() => deleteCart(data?.id)}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="24"
+                                      height="24"
+                                      fill="currentColor"
+                                      className="bi bi-trash"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                                      />
+                                    </svg>
+                                  </Link>
                                 </td>
                               </tr>
                             </>
                           );
                         })
-                      : ""}
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      <p className="cart-empty">
+                        Your carts is empty
+                        <img src="https://react-redux-cart-youtube.netlify.app/cart.gif" />
+                      </p>
+                    )}
                   </tbody>
                 </table>
               </div>
 
-              <div class="bg-light px-4 py-3">
-                <div class="row align-items-center text-center">
-                  <div class="col-md-6 mb-3 mb-md-0 text-md-start">
-                    <Link class="btn btn-link p-0 text-dark btn-sm" to="/">
+              <div className="bg-light px-4 py-3">
+                <div className="row align-items-center text-center">
+                  <div className="col-md-6 mb-3 mb-md-0 text-md-start">
+                    <Link className="btn btn-link p-0 text-dark btn-sm" to="/">
                       <svg
                         width="24px"
                         height="24px"
@@ -184,8 +275,11 @@ const ViewCart = () => {
                       Continue shopping
                     </Link>
                   </div>
-                  <div class="col-md-6 text-md-end">
-                    <Link class="btn btn-outline-dark btn-sm" to="/checkout">
+                  <div className="col-md-6 text-md-end">
+                    <Link
+                      className="btn btn-outline-dark btn-sm"
+                      to="/checkout"
+                    >
                       Procceed to checkout
                       <svg
                         width="24px"
@@ -208,37 +302,37 @@ const ViewCart = () => {
               </div>
             </div>
 
-            <div class="col-lg-4">
-              <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Cart total</h5>
-                  <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between">
-                      <strong class="text-uppercase small font-weight-bold">
+            <div className="col-lg-4">
+              <div className="card border-0 rounded-0 p-lg-4 bg-light">
+                <div className="card-body">
+                  <h5 className="text-uppercase mb-4">Cart total</h5>
+                  <ul className="list-unstyled mb-0">
+                    <li className="d-flex align-items-center justify-content-between">
+                      <strong className="text-uppercase small font-weight-bold">
                         Subtotal
                       </strong>
-                      <span class="text-muted small">₹{price}</span>
+                      <span className="text-muted small">₹{price}</span>
                     </li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4">
-                      <strong class="text-uppercase small font-weight-bold">
+                    <li className="border-bottom my-2"></li>
+                    <li className="d-flex align-items-center justify-content-between mb-4">
+                      <strong className="text-uppercase small font-weight-bold">
                         Total
                       </strong>
-                      <span>₹{price}</span>
+                      {price}
                     </li>
                     <li>
                       <form action="#">
-                        <div class="input-group">
+                        <div className="input-group">
                           <input
-                            class="form-control mb-3"
+                            className="form-control mb-3"
                             type="text"
                             placeholder="Enter your coupon"
                           />
                           <button
-                            class="btn btn-dark btn-sm w-100"
+                            className="btn btn-dark btn-sm w-100"
                             type="submit"
                           >
-                            <i class="fas fa-gift me-2"></i>Apply coupon
+                            <i className="fas fa-gift me-2"></i>Apply coupon
                           </button>
                         </div>
                       </form>

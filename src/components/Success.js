@@ -6,12 +6,12 @@ const Success = () => {
   return (
     <>
       <Layout>
-        <div class="container ">
-          <div class="row">
-            <div class="col-md-6 mx-auto mt-5">
-              <div class="payment">
-                <div class="payment_header">
-                  <div class="check">
+        <div className="container ">
+          <div className="row">
+            <div className="col-md-6 mx-auto mt-5">
+              <div className="payment">
+                <div className="payment_header">
+                  <div className="check">
                     <svg
                       width="34px"
                       height="34px"
@@ -27,7 +27,7 @@ const Success = () => {
                     </svg>
                   </div>
                 </div>
-                <div class="content">
+                <div className="content">
                   <h1>Payment Success !</h1>
                   <p>Your transaction was successful!</p>
                   <Link to="/">Go to Home</Link>

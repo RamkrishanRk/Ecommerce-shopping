@@ -20,112 +20,112 @@ const Checkout = () => {
   return (
     <>
       <Layout>
-        <section class="container py-5">
-          <h2 class="h5 text-uppercase mb-4">Billing details</h2>
-          <div class="row">
-            <div class="col-lg-8">
+        <section className="container py-5">
+          <h2 className="h5 text-uppercase mb-4">Billing details</h2>
+          <div className="row">
+            <div className="col-lg-8">
               <form action="#">
-                <div class="row gy-3">
-                  <div class="col-lg-6">
-                    <label class="form-label" for="firstName">
+                <div className="row gy-3">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="firstName">
                       First name
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="firstName"
                       placeholder="Enter your first name"
                     />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="lastName">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="lastName">
                       Last name
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="lastName"
                       placeholder="Enter your last name"
                     />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="email">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="email">
                       Email address
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="email"
                       id="email"
                       placeholder="Jason@example.com"
                     />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="phone">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="phone">
                       Phone number
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="tel"
                       id="phone"
                       placeholder="+02 245354745"
                     />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="company">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="company">
                       Company name (optional)
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="company"
                       placeholder="Your company name"
                     />
                   </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="form-label" for="country">
+                  <div className="col-lg-6 form-group">
+                    <label className="form-label" for="country">
                       Country
                     </label>
-                    <select id="country" class="form-control rounded-0">
+                    <select id="country" className="form-control rounded-0">
                       <option value>Choose your country</option>
                     </select>
                   </div>
-                  <div class="col-lg-12">
-                    <label class="form-label" for="address">
+                  <div className="col-lg-12">
+                    <label className="form-label" for="address">
                       Address line 1
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="address"
                       placeholder="House number and street name"
                     />
                   </div>
-                  <div class="col-lg-12">
-                    <label class="form-label" for="addressalt">
+                  <div className="col-lg-12">
+                    <label className="form-label" for="addressalt">
                       Address line 2
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="addressalt"
                       placeholder="Apartment, Suite, Unit, etc (optional)"
                     />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="city">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="city">
                       Town/City
                     </label>
-                    <input class="form-control" type="text" id="city" />
+                    <input className="form-control" type="text" id="city" />
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-label" for="state">
+                  <div className="col-lg-6">
+                    <label className="form-label" for="state">
                       State/County
                     </label>
-                    <input class="form-control" type="text" id="state" />
+                    <input className="form-control" type="text" id="state" />
                   </div>
-                  <div class="col-lg-6">
+                  <div className="col-lg-6">
                     <button
-                      class="btn btn-link text-dark p-0 shadow-0"
+                      className="btn btn-link text-dark p-0 shadow-0"
                       type="button"
                       data-bs-toggle="collapse"
                       href="#alternateAddress"
@@ -133,158 +133,158 @@ const Checkout = () => {
                       aria-expanded="false"
                       aria-controls="alternateAddress"
                     >
-                      <div class="form-check">
+                      <div className="form-check">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           id="alternateAddress"
                           type="checkbox"
                         />
-                        <label class="form-check-label" for="alternateAddress">
+                        <label className="form-check-label" for="alternateAddress">
                           Alternate billing address
                         </label>
                       </div>
                     </button>
                   </div>
-                  <div class="collapse" id="alternateAddress">
-                    <div class="row gy-3">
-                      <div class="col-12 mt-4">
-                        <h2 class="h4 text-uppercase mb-4">
+                  <div className="collapse" id="alternateAddress">
+                    <div className="row gy-3">
+                      <div className="col-12 mt-4">
+                        <h2 className="h4 text-uppercase mb-4">
                           Alternative billing details
                         </h2>
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="firstName2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="firstName2">
                           First name
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           id="firstName2"
                           placeholder="Enter your first name"
                         />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="lastName2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="lastName2">
                           Last name
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           id="lastName2"
                           placeholder="Enter your last name"
                         />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="email2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="email2">
                           Email address
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="email"
                           id="email2"
                           placeholder="Jason@example.com"
                         />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="phone2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="phone2">
                           Phone number
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="tel"
                           id="phone2"
                           placeholder="+02 245354745"
                         />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="company2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="company2">
                           Company name (optional)
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           id="company2"
                           placeholder="Your company name"
                         />
                       </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="form-label" for="countryAlt">
+                      <div className="col-lg-6 form-group">
+                        <label className="form-label" for="countryAlt">
                           Country
                         </label>
-                        <select id="countryAlt" class="form-control rounded-0">
+                        <select id="countryAlt" className="form-control rounded-0">
                           <option value>Choose your country</option>
                         </select>
                       </div>
 
-                      <div class="col-lg-12">
-                        <label class="form-label" for="address2">
+                      <div className="col-lg-12">
+                        <label className="form-label" for="address2">
                           Address line 1
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           id="address2"
                           placeholder="House number and street name"
                         />
                       </div>
-                      <div class="col-lg-12">
-                        <label class="form-label" for="addressalt2">
+                      <div className="col-lg-12">
+                        <label className="form-label" for="addressalt2">
                           Address line 2
                         </label>
                         <input
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           id="addressalt2"
                           placeholder="Apartment, Suite, Unit, etc (optional)"
                         />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="city2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="city2">
                           Town/City
                         </label>
-                        <input class="form-control" type="text" id="city2" />
+                        <input className="form-control" type="text" id="city2" />
                       </div>
-                      <div class="col-lg-6">
-                        <label class="form-label" for="state2">
+                      <div className="col-lg-6">
+                        <label className="form-label" for="state2">
                           State/County
                         </label>
-                        <input class="form-control" type="text" id="state2" />
+                        <input className="form-control" type="text" id="state2" />
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-12 form-group">
+                  <div className="col-lg-12 form-group">
                     <Link to="/success">
-                      <button class="btn btn-dark">Place order</button>
+                      <button className="btn btn-dark">Place order</button>
                     </Link>
                   </div>
                 </div>
               </form>
             </div>
-            <div class="col-lg-4">
-              <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Your order</h5>
+            <div className="col-lg-4">
+              <div className="card border-0 rounded-0 p-lg-4 bg-light">
+                <div className="card-body">
+                  <h5 className="text-uppercase mb-4">Your order</h5>
                   {CheckoutData
                     ? CheckoutData.map((data) => {
                         return (
                           <>
-                            <ul class="list-unstyled mb-0">
-                              <li class="d-flex align-items-center justify-content-between">
-                                <strong class="small fw-bold">
+                            <ul className="list-unstyled mb-0">
+                              <li className="d-flex align-items-center justify-content-between">
+                                <strong className="small fw-bold">
                                   {data.title}
                                 </strong>
-                                <span class="text-muted small">
+                                <span className="text-muted small">
                                   ₹{data.price}
                                 </span>
                               </li>
-                              <li class="border-bottom my-2"></li>
+                              <li className="border-bottom my-2"></li>
                             </ul>
                           </>
                         );
                       })
                     : ""}
-                  <li class="d-flex align-items-center justify-content-between">
-                    <strong class="text-uppercase small fw-bold">Total</strong>
+                  <li className="d-flex align-items-center justify-content-between">
+                    <strong className="text-uppercase small fw-bold">Total</strong>
                     <span>₹{price}</span>
                   </li>
                 </div>
