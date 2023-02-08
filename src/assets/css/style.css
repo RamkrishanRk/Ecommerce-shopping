@@ -171,6 +171,7 @@
   display: flex;
   align-items: center;
   margin-left: 4rem;
+  cursor: pointer;
 }
 .btn-cart-view {
   display: flex;
@@ -293,4 +294,41 @@
 }
 .breadcrumb-item a {
   text-decoration: none;
+}
+
+.badge--sales {
+  display: inline-block;
+  background-color: green;
+  width: auto;
+  height: 30px;
+}
+.badge {
+  border-radius: 5px;
+  font-size: 1rem;
+  position: absolute;
+  right: 7rem;
+  margin-top: -5rem;
+}
+.badge--sales::before {
+  position: absolute;
+  left: -20px;
+  top: 3px;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-right: 20px solid green;
+  border-bottom: 20px solid transparent;
+}
+.badge--sales::after {
+  display: block;
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  left: -5px;
+  top: calc(100% / 2 - 5px);
 }

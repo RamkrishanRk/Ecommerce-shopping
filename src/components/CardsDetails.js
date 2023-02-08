@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import Categories from "../pages/Categories";
 import {
   Add_Card,
   DecrementItems,
   DeleteItems,
 } from "../redux/actions/AddToCard";
-// import axios from "axios";
-// import { loadStripe } from "@stripe/stripe-js";
 
 const CardsDetails = () => {
+  const location = useLocation();
   const { id } = useParams();
   const data = useSelector((state) => state?.cartreducer?.carts);
   const [user, setUser] = useState([]);
@@ -41,36 +39,31 @@ const CardsDetails = () => {
     dispatch(DecrementItems(item));
   };
 
-  // const handleCheckout = async (e) => {
-  //   e.preventDefault();
-  //   const line_items = user.map((item) => {
-  //     return {
-  //       qnty: item.qnty,
-  //       price_data: {
-  //         currency: "usd",
-  //         unit_amount: item.price * 100,
-  //         product_data: {
-  //           name: item.title,
-  //           description: item.description,
-  //           images: [item.image],
-  //         },
-  //       },
-  //     };
-  //   });
-  //   const response = await axios.post(
-  //     `http://localhost:4000/create-checkout-session`,
-  //     line_items
-  //   );
-  //   const stripe = await loadStripe(`${process.env.REACT_APP_TITLE}`);
-  //   const { error } = await stripe.redirectToCheckout({
-  //     sessionId: response?.data?.id,
-  //   });
+  var discountPercentage;
+  const getDiscountPercentage = (quantity, amount) => {
+    switch (quantity) {
+      case 1:
+        discountPercentage = 0;
+        break;
+      case 2:
+        discountPercentage = 10;
+        break;
+      case 3:
+        discountPercentage = 11;
+        break;
+      case 4:
+        discountPercentage = 12;
+        break;
+      case 5:
+        discountPercentage = 13;
+        break;
+      default:
+        discountPercentage = 15;
+    }
 
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+    const exactDis = (amount * discountPercentage) / 100;
+    return Math.round(amount * quantity - exactDis);
+  };
   return (
     <>
       <Layout>
@@ -145,7 +138,9 @@ const CardsDetails = () => {
                       </div>
                       <div className="col-lg-6">
                         <h1>{item?.title}</h1>
-                        <p className="text-muted lead">₹{item?.price}</p>
+                        <p className="text-muted lead">
+                          ₹{getDiscountPercentage(item?.qnty, item?.price)}
+                        </p>
                         <p className="text-sm mb-4">{item?.description}</p>
                         <div className="row align-items-stretch mb-4">
                           <div className="col-sm-5 pr-sm-0">
@@ -195,11 +190,15 @@ const CardsDetails = () => {
                             </div>
                           </div>
                         </div>
+                        <p>
+                          {discountPercentage > 0 &&
+                            ` Upto ${discountPercentage}% EMI interest savings on select Credit Cards`}
+                        </p>
                         <ul className="list-unstyled small d-inline-block">
                           <li className="px-2 py-2 mb-1">
                             <strong className="text-uppercase">Total:</strong>
                             <span className="ms-2 text-muted">
-                              ₹{item?.price * item?.qnty}
+                              ₹{getDiscountPercentage(item?.qnty, item?.price)}
                             </span>
                           </li>
                           <li className="px-2 py-2 mb-1">
@@ -228,10 +227,7 @@ const CardsDetails = () => {
                             </span>
                           </li>
                           <Link to="/checkout">
-                            <button
-                              className="proccess-section"
-                              // onClick={handleCheckout}
-                            >
+                            <button className="btn btn-sm btn-dark">
                               Procceed to checkout
                               <svg
                                 width="35"
@@ -243,8 +239,8 @@ const CardsDetails = () => {
                                 <path
                                   d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
                                   stroke="#fff"
-                                  stroke-width="1.5"
-                                  stroke-linecap="round"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
                                   strokeLinejoin="round"
                                 />
                               </svg>

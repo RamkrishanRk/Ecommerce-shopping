@@ -19,38 +19,39 @@ const ViewCart = () => {
     navigate("/");
   };
 
+  var discountPercentage;
+  const getDiscountPercentage = (quantity, amount) => {
+    switch (quantity) {
+      case 1:
+        discountPercentage = 0;
+        break;
+      case 2:
+        discountPercentage = 10;
+        break;
+      case 3:
+        discountPercentage = 11;
+        break;
+      case 4:
+        discountPercentage = 12;
+        break;
+      case 5:
+        discountPercentage = 13;
+        break;
+      default:
+        discountPercentage = 15;
+    }
+
+    const exactDis = (amount * discountPercentage) / 100;
+    return Math.round(amount * quantity - exactDis);
+  };
+
   const addToCart = (e) => {
     dispatch(Add_Card(e));
   };
   const DecrementToCart = (item) => {
     dispatch(DecrementItems(item));
   };
-
-  const getDiscountPercentage = (quantity, amount) => {
-    var discountPercentage;
-    switch (quantity) {
-      case 1:
-        discountPercentage = 0;
-        break;
-      case 2:
-        discountPercentage = 11;
-        break;
-      case 3:
-        discountPercentage = 12;
-        break;
-      case 4:
-        discountPercentage = 13;
-        break;
-      case 5:
-        discountPercentage = 14;
-        break;
-      default:
-        discountPercentage = 15;
-    }
-    const exactDis = (amount * discountPercentage) / 100;
-    return Math.round(amount * quantity - exactDis);
-  };
-
+  // sub total
   const priceData = () => {
     let price = 0;
     viewCarted.map((item) => {
@@ -62,6 +63,20 @@ const ViewCart = () => {
   useEffect(() => {
     priceData();
   }, [priceData]);
+  // Total
+  const [cartSum, setCartSum] = useState(0);
+  var arr = [];
+  const countSum = (price) => {
+    arr.push(price);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCartSum(arr);
+    }, 0);
+  }, [arr]);
+  const totalcart = cartSum ? cartSum?.reduce((sum, a) => sum + a, 0) : "";
+
   return (
     <>
       <Layout>
@@ -124,10 +139,13 @@ const ViewCart = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="border-0">
+                  <tbody className="border-0 position-relative">
                     {viewCarted.length ? (
                       viewCarted ? (
                         viewCarted.map((data) => {
+                          countSum(
+                            getDiscountPercentage(data?.qnty, data?.price)
+                          );
                           return (
                             <>
                               <tr>
@@ -139,7 +157,7 @@ const ViewCart = () => {
                                     >
                                       <img
                                         src={data?.image}
-                                        alt="..."
+                                        alt="image"
                                         style={{
                                           width: "4rem",
                                           height: "4rem",
@@ -189,6 +207,11 @@ const ViewCart = () => {
                                         </svg>
                                       </div>
                                       {data?.qnty}
+                                      {discountPercentage > 0 && (
+                                        <div className="badge badge--sales">
+                                          {` Up to ${discountPercentage}% off`}
+                                        </div>
+                                      )}
                                       <div
                                         className="inc-btn p-0"
                                         onClick={() => addToCart(data)}
@@ -208,7 +231,7 @@ const ViewCart = () => {
                                 </td>
                                 <td className="p-3 align-middle border-0">
                                   <p className="mb-0 small">
-                                    {/* ₹{data?.price * data?.qnty} */}₹
+                                    ₹
                                     {getDiscountPercentage(
                                       data?.qnty,
                                       data?.price
@@ -266,8 +289,8 @@ const ViewCart = () => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M11.0303 7.71967C11.3232 8.01256 11.3232 8.48744 11.0303 8.78033L8.56066 11.25H17.25C17.6642 11.25 18 11.5858 18 12C18 12.4142 17.6642 12.75 17.25 12.75H8.56066L11.0303 15.2197C11.3232 15.5126 11.3232 15.9874 11.0303 16.2803C10.7374 16.5732 10.2626 16.5732 9.96967 16.2803L6.21967 12.5303C5.92678 12.2374 5.92678 11.7626 6.21967 11.4697L9.96967 7.71967C10.2626 7.42678 10.7374 7.42678 11.0303 7.71967Z"
                           fill="#000"
                         />
@@ -291,9 +314,9 @@ const ViewCart = () => {
                         <path
                           d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
                           stroke="#000"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </Link>
@@ -318,7 +341,7 @@ const ViewCart = () => {
                       <strong className="text-uppercase small font-weight-bold">
                         Total
                       </strong>
-                      {price}
+                      ₹{totalcart}
                     </li>
                     <li>
                       <form action="#">

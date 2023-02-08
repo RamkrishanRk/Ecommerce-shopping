@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Add_Card } from "../redux/actions/AddToCard";
@@ -9,7 +9,6 @@ const CartDetail = () => {
   const data = location.state?.item;
 
   const dispatch = useDispatch();
-
   const addToCart = (e) => {
     dispatch(Add_Card(e));
   };
@@ -103,9 +102,10 @@ const CartDetail = () => {
                     </div>
                     <ul className="list-unstyled small">
                       <Link to="/view-cart" onClick={() => addToCart(data)}>
-                        <button className="proccess-section p-2">
-                          Add To Card
-                        </button>
+                        <button className="btn btn-dark">Add To Card</button>
+                      </Link>
+                      <Link to="/checkout">
+                        <button className="btn btn-dark ms-2 ">Buy Now</button>
                       </Link>
                     </ul>
                   </div>

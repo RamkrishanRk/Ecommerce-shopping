@@ -19,7 +19,7 @@ function App() {
           <Route path="/cencel" element={<Cencel />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/view-cart" element={<ViewCart />} />
-          <Route path="/detail" element={<CartDetail />} />
+          <Route path="/cart-detail" element={<CartDetail />} />
         </Routes>
       </BrowserRouter>
     </>

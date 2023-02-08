@@ -12,7 +12,7 @@ const Categories = () => {
 
   const addToCart = (e) => {
     dispatch(Add_Card(e));
-    toast.success("add to cart successfull ...");
+    toast.success("Product added to cart successfully...");
   };
   const isItemExist = (e) => {
     return cartData.findIndex((item) => item.id === e) === -1;
@@ -36,7 +36,7 @@ const Categories = () => {
                       <div className="badge text-white bg-"></div>
                       <Link
                         className="reset-anchor d-block animsition-link"
-                        to={`/detail`}
+                        to={`/cart-detail`}
                         state={{ item: item }}
                       >
                         <img
