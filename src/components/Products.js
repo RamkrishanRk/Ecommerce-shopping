@@ -7,20 +7,11 @@ const products = [
     sub_title: " 1175 + order placed from here recently",
     price: 250,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 3,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -33,20 +24,11 @@ const products = [
     sub_title: " 2525 + order placed from here recently",
     price: 300,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -58,20 +40,11 @@ const products = [
     sub_title: " 650 + order placed from here recently",
     price: 350,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -83,20 +56,11 @@ const products = [
     sub_title: " 300 + order placed from here recently",
     price: 70,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -108,20 +72,11 @@ const products = [
     sub_title: "1050 + order placed from here recently",
     price: 210,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -133,20 +88,11 @@ const products = [
     address: "Wraps FastFood, Chines",
     price: 400,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -156,22 +102,13 @@ const products = [
     image:
       "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-8.d7432880.jpg",
     sub_title: " 1100 + order placed from here recently",
-    price: 13000,
+    price: 1200,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },
@@ -184,46 +121,11 @@ const products = [
     sub_title: "500 + order placed from here recently",
     price: 351,
     qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
-  },
-  {
-    id: 9,
-    title: "Headphones",
-    image:
-      "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/cat-img-4.5db5d5ec.jpg",
-    address: "Burger, Sandwich, Fast Food",
-    sub_title: "500 + order placed from here recently",
-    price: 401,
-    qnty: 0,
-    reviews: [
-      {
-        id: 1,
-        user_name: "daman",
-        rating: 5,
-        review: "Good quality and best product!",
-      },
-      {
-        id: 2,
-        user_name: "Ekta",
-        rating: 1,
-        review: "This is bad product!",
-      },
-    ],
+    discount: 0,
+    availability: "In Stock",
+    mpn: "00638NIC",
+    age_group: "adult",
+    category: "Apparel & Accessories > Clothing",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.",
   },

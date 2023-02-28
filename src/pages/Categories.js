@@ -17,6 +17,7 @@ const Categories = () => {
   const isItemExist = (e) => {
     return cartData.findIndex((item) => item.id === e) === -1;
   };
+
   return (
     <>
       <section className="py-5">
@@ -36,7 +37,7 @@ const Categories = () => {
                       <div className="badge text-white bg-"></div>
                       <Link
                         className="reset-anchor d-block animsition-link"
-                        to={`/cart-detail`}
+                        to={`/detail`}
                         state={{ item: item }}
                       >
                         <img

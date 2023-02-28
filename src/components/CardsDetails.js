@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import {
-  Add_Card,
-  DecrementItems,
-  DeleteItems,
-} from "../redux/actions/AddToCard";
+import { Add_Card, DecrementItems } from "../redux/actions/AddToCard";
 
 const CardsDetails = () => {
-  const location = useLocation();
   const { id } = useParams();
   const data = useSelector((state) => state?.cartreducer?.carts);
   const [user, setUser] = useState([]);
@@ -26,11 +21,6 @@ const CardsDetails = () => {
   }, [id]);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const deleteCart = (id) => {
-    dispatch(DeleteItems(id));
-    navigate("/");
-  };
 
   const addToCart = (e) => {
     dispatch(Add_Card(e));
@@ -189,64 +179,156 @@ const CardsDetails = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <p>
-                          {discountPercentage > 0 &&
-                            ` Upto ${discountPercentage}% EMI interest savings on select Credit Cards`}
-                        </p>
-                        <ul className="list-unstyled small d-inline-block">
-                          <li className="px-2 py-2 mb-1">
-                            <strong className="text-uppercase">Total:</strong>
-                            <span className="ms-2 text-muted">
-                              ₹{getDiscountPercentage(item?.qnty, item?.price)}
-                            </span>
-                          </li>
-                          <li className="px-2 py-2 mb-1">
-                            <strong className="text-uppercase text-dark">
-                              Remove :
-                            </strong>
-                            <span
-                              onClick={() => deleteCart(item?.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mx-2"
+                          <div class="col-sm-3 pl-sm-0">
+                            <Link
+                              class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
+                              to="/cart"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="#fb641b"
-                                className="bi bi-trash"
-                                viewBox="0 0 16 16"
-                              >
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                <path
-                                  fillRule="evenodd"
-                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                                />
-                              </svg>
+                              Add to cart
+                            </Link>
+                          </div>
+                        </div>
+                        <ul class="list-unstyled small d-inline-block">
+                          <li class="px-3 py-2 mb-1 bg-white">
+                            <strong class="text-uppercase">Offers:</strong>
+                            <span class="ms-2 text-muted">
+                              {discountPercentage <= 0 &&
+                                ` Upto ${discountPercentage}% EMI interest savings on select payments..`}
+                              {discountPercentage > 0 &&
+                                ` Upto ${discountPercentage}% EMI interest savings on select payments..`}
                             </span>
                           </li>
-                          <Link to="/checkout">
-                            <button className="btn btn-sm btn-dark">
-                              Procceed to checkout
-                              <svg
-                                width="35"
-                                height="35"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
-                                  stroke="#fff"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </button>
-                          </Link>
+                          <li class="px-3 py-2 mb-1 bg-white">
+                            <strong class="text-uppercase">SKU:</strong>
+                            <span class="ms-2 text-muted">{item?.mpn}</span>
+                          </li>
+                          <li class="px-3 py-2 mb-1 bg-white text-muted">
+                            <strong class="text-uppercase text-dark">
+                              Category:
+                            </strong>
+                            <span class="ms-2 text-muted">
+                              {item?.age_group}
+                            </span>
+                          </li>
+                          <li class="px-3 py-2 mb-1 bg-white text-muted">
+                            <strong class="text-uppercase text-dark">
+                              Tags:
+                            </strong>
+                            <span class="ms-2 text-muted">
+                              {item?.category}
+                            </span>
+                          </li>
                         </ul>
+                      </div>
+                    </div>
+                    <ul
+                      class="nav nav-tabs border-0 description-list-tab"
+                      id="myTab"
+                      role="tablist"
+                    >
+                      <li class="nav-item">
+                        <a
+                          class="nav-link text-uppercase active"
+                          id="description-tab"
+                          data-bs-toggle="tab"
+                          href="#description"
+                          role="tab"
+                          aria-controls="description"
+                          aria-selected="true"
+                        >
+                          Description
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link text-uppercase"
+                          id="reviews-tab"
+                          data-bs-toggle="tab"
+                          href="#reviews"
+                          role="tab"
+                          aria-controls="reviews"
+                          aria-selected="false"
+                        >
+                          Reviews
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="tab-content mb-5" id="myTabContent">
+                      <div
+                        class="tab-pane fade show active"
+                        id="description"
+                        role="tabpanel"
+                        aria-labelledby="description-tab"
+                      >
+                        <div class="p-4 p-lg-5 bg-white">
+                          <h6 class="text-uppercase fw-bold">
+                            Product description
+                          </h6>
+                          <p class="text-muted text-sm mb-0">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        class="tab-pane fade"
+                        id="reviews"
+                        role="tabpanel"
+                        aria-labelledby="reviews-tab"
+                      >
+                        <div class="p-4 p-lg-5">
+                          <div class="row">
+                            <div class="col-lg-8">
+                              <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                  <img
+                                    class="rounded-circle"
+                                    src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/customer-1.2909e6e3.png"
+                                    alt="customer-2.png"
+                                    width="50"
+                                  />
+                                </div>
+                                <div class="ms-3 flex-shrink-1">
+                                  <h6 class="mb-0 text-uppercase fw-bold">
+                                    Jane Doe
+                                  </h6>
+                                  <p class="small text-muted mb-0 text-uppercase">
+                                    20 May 2020
+                                  </p>
+                                  <ul class="list-inline mb-1 text-xs">
+                                    <li class="list-inline-item m-0">
+                                      <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item m-0">
+                                      <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item m-0">
+                                      <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item m-0">
+                                      <i class="fas fa-star text-warning"></i>
+                                    </li>
+                                    <li class="list-inline-item m-0">
+                                      <i class="fas fa-star-half-alt text-warning"></i>
+                                    </li>
+                                  </ul>
+                                  <p class="text-sm mb-0 text-muted">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

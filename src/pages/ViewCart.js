@@ -7,6 +7,8 @@ import {
   DecrementItems,
   DeleteItems,
 } from "../redux/actions/AddToCard";
+import { v4 } from "uuid";
+import { toast } from "react-toastify";
 
 const ViewCart = () => {
   const viewCarted = useSelector((state) => state?.cartreducer?.carts);
@@ -44,7 +46,6 @@ const ViewCart = () => {
     const exactDis = (amount * discountPercentage) / 100;
     return Math.round(amount * quantity - exactDis);
   };
-
   const addToCart = (e) => {
     dispatch(Add_Card(e));
   };
@@ -55,7 +56,7 @@ const ViewCart = () => {
   const priceData = () => {
     let price = 0;
     viewCarted.map((item) => {
-      price = item?.price * item.qnty + price;
+      price = item?.price * item?.qnty + price;
     });
     setPrice(price);
   };
@@ -63,20 +64,29 @@ const ViewCart = () => {
   useEffect(() => {
     priceData();
   }, [priceData]);
+
   // Total
-  const [cartSum, setCartSum] = useState(0);
-  var arr = [];
-  const countSum = (price) => {
-    arr.push(price);
+  let discountPrices = viewCarted?.map((i) => {
+    let getDiscount = getDiscountPercentage(i?.qnty, i?.price);
+    return getDiscount;
+  });
+  const totalcart = discountPrices
+    ? discountPrices?.reduce((sum, a) => sum + a, 0)
+    : "";
+
+  // coupon
+  const uniqe = v4();
+  const [coupon, setCoupon] = useState(uniqe.slice(0, 8));
+  const couponSubmit = () => {
+    setCoupon(uniqe.slice(0, 8));
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setCartSum(arr);
-    }, 0);
-  }, [arr]);
-  const totalcart = cartSum ? cartSum?.reduce((sum, a) => sum + a, 0) : "";
-
+  const [couponApply, setCouponApply] = useState();
+  const [coupondisble, setCouponDisble] = useState(false);
+  const applySubmit = () => {
+    setCouponApply(Math.round(totalcart - totalcart * (5 / 100)));
+    toast.success("Get Upto 5% Off Croccs New User & Old Offer Coupon Code..");
+    setCouponDisble(true);
+  };
   return (
     <>
       <Layout>
@@ -135,6 +145,11 @@ const ViewCart = () => {
                         </strong>
                       </th>
                       <th className="border-0 p-3" scope="col">
+                        <strong className="text-sm text-uppercase">
+                          discount
+                        </strong>
+                      </th>
+                      <th className="border-0 p-3" scope="col">
                         <strong className="text-sm text-uppercase"></strong>
                       </th>
                     </tr>
@@ -142,10 +157,7 @@ const ViewCart = () => {
                   <tbody className="border-0 position-relative">
                     {viewCarted.length ? (
                       viewCarted ? (
-                        viewCarted.map((data) => {
-                          countSum(
-                            getDiscountPercentage(data?.qnty, data?.price)
-                          );
+                        viewCarted.map((data, ind) => {
                           return (
                             <>
                               <tr>
@@ -207,11 +219,6 @@ const ViewCart = () => {
                                         </svg>
                                       </div>
                                       {data?.qnty}
-                                      {discountPercentage > 0 && (
-                                        <div className="badge badge--sales">
-                                          {` Up to ${discountPercentage}% off`}
-                                        </div>
-                                      )}
                                       <div
                                         className="inc-btn p-0"
                                         onClick={() => addToCart(data)}
@@ -231,17 +238,18 @@ const ViewCart = () => {
                                 </td>
                                 <td className="p-3 align-middle border-0">
                                   <p className="mb-0 small">
-                                    ₹
-                                    {getDiscountPercentage(
-                                      data?.qnty,
-                                      data?.price
-                                    )}
+                                    ₹{discountPrices[ind]}
+                                  </p>
+                                </td>
+                                <td className="p-3 align-middle border-0">
+                                  <p className="mb-0 small discount-percentage text-center text-success">
+                                    {`${discountPercentage}% Off`}
                                   </p>
                                 </td>
                                 <td className="p-3 align-middle border-0">
                                   <Link
                                     className="reset-anchor"
-                                    to="/view-cart"
+                                    to="/cart"
                                     onClick={() => deleteCart(data?.id)}
                                   >
                                     <svg
@@ -341,24 +349,32 @@ const ViewCart = () => {
                       <strong className="text-uppercase small font-weight-bold">
                         Total
                       </strong>
-                      ₹{totalcart}
+                      ₹{couponApply == undefined ? totalcart : couponApply}
                     </li>
                     <li>
-                      <form action="#">
-                        <div className="input-group">
-                          <input
-                            className="form-control mb-3"
-                            type="text"
-                            placeholder="Enter your coupon"
-                          />
-                          <button
-                            className="btn btn-dark btn-sm w-100"
-                            type="submit"
-                          >
-                            <i className="fas fa-gift me-2"></i>Apply coupon
-                          </button>
-                        </div>
-                      </form>
+                      <div className="position-relative">
+                        <input
+                          className="form-control mb-3 w-100"
+                          type="text"
+                          placeholder="Enter your coupon"
+                          value={coupon}
+                        />
+                        <button
+                          class="btn btn-dark-light generate-code"
+                          type="button"
+                          onClick={() => couponSubmit()}
+                        >
+                          Generate Code
+                        </button>
+                        <button
+                          className="btn btn-dark btn-sm w-100"
+                          type="submit"
+                          onClick={() => applySubmit()}
+                          disabled={coupondisble}
+                        >
+                          Apply coupon
+                        </button>
+                      </div>
                     </li>
                   </ul>
                 </div>
