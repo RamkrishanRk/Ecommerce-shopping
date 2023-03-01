@@ -7,10 +7,10 @@ const Navbar = () => {
 
   return (
     <>
-      <header class="header bg-white">
-        <div class="container px-lg-3">
-          <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
-            <Link class="navbar-brand d-flex align-items-center" to="/">
+      <header className="header bg-white">
+        <div className="container px-lg-3">
+          <nav className="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
+            <Link className="navbar-brand d-flex align-items-center" to="/">
               <svg
                 width="35px"
                 height="35px"
@@ -33,10 +33,10 @@ const Navbar = () => {
                   ></path>
                 </g>
               </svg>
-              <span class="fw-bold text-dark">Shopify</span>
+              <span className="fw-bold text-dark">Shopify</span>
             </Link>
             <button
-              class="navbar-toggler navbar-toggler-end"
+              className="navbar-toggler navbar-toggler-end"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
@@ -44,23 +44,23 @@ const Navbar = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                  <Link class="nav-link active" to="/">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto">
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/">
                     Home
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">
                     Shop
                   </Link>
                 </li>
-                <li class="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <Link
-                    class="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle"
                     id="pagesDropdown"
                     to="#"
                     data-bs-toggle="dropdown"
@@ -70,20 +70,20 @@ const Navbar = () => {
                     Pages
                   </Link>
                   <div
-                    class="dropdown-menu mt-3 shadow-sm"
+                    className="dropdown-menu mt-3 shadow-sm"
                     aria-labelledby="pagesDropdown"
                   >
-                    <Link class="dropdown-item border-0 transition-link" to="/">
+                    <Link className="dropdown-item border-0 transition-link" to="/">
                       Homepage
                     </Link>
                     <Link
-                      class="dropdown-item border-0 transition-link"
+                      className="dropdown-item border-0 transition-link"
                       to="/cart"
                     >
                       Shopping cart
                     </Link>
                     <Link
-                      class="dropdown-item border-0 transition-link"
+                      className="dropdown-item border-0 transition-link"
                       to="/checkout"
                     >
                       Checkout
@@ -91,8 +91,8 @@ const Navbar = () => {
                   </div>
                 </li>
               </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+              <ul className="navbar-nav ms-auto">
+                <li className="nav-item">
                   <Link to="/cart" className="nav-link">
                     <svg
                       className="V3C5bO me-1"
@@ -107,12 +107,12 @@ const Navbar = () => {
                       ></path>
                     </svg>
                     Cart
-                    <small class="text-gray fw-normal">({data.length})</small>
+                    <small className="text-gray fw-normal">({data.length})</small>
                   </Link>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <Link
-                    class="nav-link d-flex align-items-center"
+                    className="nav-link d-flex align-items-center"
                     to="#"
                     data-bs-toggle="modal"
                     data-bs-target="#productView"

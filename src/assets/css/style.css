@@ -414,3 +414,14 @@
 .btn-cart-category {
   display: flex;
 }
+#js-container {
+  width: 200px !important;
+  height: 180px !important;
+  padding: 6px;
+  position: absolute !important;
+  top: 8rem;
+}
+canvas#js-canvas {
+  width: 200px !important;
+  height: 180px !important;
+}

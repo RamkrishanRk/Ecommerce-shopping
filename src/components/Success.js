@@ -21,7 +21,7 @@ const Success = () => {
                       <polyline
                         fill="none"
                         stroke="#000"
-                        stroke-width="2"
+                        strokeWidth="2"
                         points="6 13 10.2 16.6 18 7"
                       />
                     </svg>

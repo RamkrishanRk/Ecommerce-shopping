@@ -7,8 +7,8 @@ import {
   DecrementItems,
   DeleteItems,
 } from "../redux/actions/AddToCard";
+import ScratchCard from "react-scratch-coupon";
 import { v4 } from "uuid";
-import { toast } from "react-toastify";
 
 const ViewCart = () => {
   const viewCarted = useSelector((state) => state?.cartreducer?.carts);
@@ -76,23 +76,38 @@ const ViewCart = () => {
 
   // coupon
   const uniqe = v4();
-  const [coupon, setCoupon] = useState(uniqe.slice(0, 8));
-  const couponSubmit = () => {
-    setCoupon(uniqe.slice(0, 8));
+
+  const codeId = uniqe?.slice(0, 8);
+  const PROMOTIONS = [
+    {
+      code: codeId,
+      discount: "5%",
+    },
+  ];
+  const [promoCode, setPromoCode] = useState("");
+  const [discountPercent, setDiscountPercent] = useState(0);
+  const discount = (totalcart * discountPercent) / 100;
+  const onEnterPromoCode = (event) => {
+    setPromoCode(event.target.value);
   };
-  const [couponApply, setCouponApply] = useState();
-  const [coupondisble, setCouponDisble] = useState(false);
-  const applySubmit = () => {
-    setCouponApply(Math.round(totalcart - totalcart * (5 / 100)));
-    toast.success("Get Upto 5% Off Croccs New User & Old Offer Coupon Code..");
-    setCouponDisble(true);
+
+  const checkPromoCode = () => {
+    for (var i = 0; i < PROMOTIONS.length; i++) {
+      if (promoCode === PROMOTIONS[i].code) {
+        setDiscountPercent(parseFloat(PROMOTIONS[i].discount.replace("%", "")));
+
+        return;
+      }
+    }
+
+    alert("Sorry, the Promotional code you entered is not valid!");
   };
   return (
     <>
       <Layout>
         <section className="container py-5">
           <div className="py-5 bg-light mb-5">
-            <div className="container">
+            <div className="container position-relative">
               <div className="row px-4 px-lg-5 py-lg-4 align-items-center">
                 <div className="col-lg-6">
                   <h1 className="h2 text-uppercase mb-0">Cart</h1>
@@ -144,17 +159,17 @@ const ViewCart = () => {
                           Total
                         </strong>
                       </th>
-                      <th className="border-0 p-3" scope="col">
+                      {/* <th className="border-0 p-3" scope="col">
                         <strong className="text-sm text-uppercase">
                           discount
                         </strong>
-                      </th>
+                      </th> */}
                       <th className="border-0 p-3" scope="col">
                         <strong className="text-sm text-uppercase"></strong>
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="border-0 position-relative">
+                  <tbody className="border-0">
                     {viewCarted.length ? (
                       viewCarted ? (
                         viewCarted.map((data, ind) => {
@@ -219,6 +234,14 @@ const ViewCart = () => {
                                         </svg>
                                       </div>
                                       {data?.qnty}
+                                      {/* {discountPercentage} */}
+                                      {/* {data?.qnty > 4 ? (
+                                        <ScratchCard>
+                                          <code>{code}</code>
+                                        </ScratchCard>
+                                      ) : (
+                                        data?.qnty
+                                      )} */}
                                       <div
                                         className="inc-btn p-0"
                                         onClick={() => addToCart(data)}
@@ -241,11 +264,11 @@ const ViewCart = () => {
                                     ₹{discountPrices[ind]}
                                   </p>
                                 </td>
-                                <td className="p-3 align-middle border-0">
+                                {/* <td className="p-3 align-middle border-0">
                                   <p className="mb-0 small discount-percentage text-center text-success">
                                     {`${discountPercentage}% Off`}
                                   </p>
-                                </td>
+                                </td> */}
                                 <td className="p-3 align-middle border-0">
                                   <Link
                                     className="reset-anchor"
@@ -332,7 +355,6 @@ const ViewCart = () => {
                 </div>
               </div>
             </div>
-
             <div className="col-lg-4">
               <div className="card border-0 rounded-0 p-lg-4 bg-light">
                 <div className="card-body">
@@ -345,40 +367,44 @@ const ViewCart = () => {
                       <span className="text-muted small">₹{price}</span>
                     </li>
                     <li className="border-bottom my-2"></li>
+                    {discount > 0 && (
+                      <li className="d-flex align-items-center justify-content-between mb-4">
+                        <strong className="text-uppercase small font-weight-bold">
+                          Discount
+                        </strong>
+                        ₹{Math.round(discount)}
+                      </li>
+                    )}
+
                     <li className="d-flex align-items-center justify-content-between mb-4">
                       <strong className="text-uppercase small font-weight-bold">
                         Total
                       </strong>
-                      ₹{couponApply == undefined ? totalcart : couponApply}
+                      ₹{Math.round(totalcart - discount)}
                     </li>
                     <li>
                       <div className="position-relative">
                         <input
                           className="form-control mb-3 w-100"
                           type="text"
-                          placeholder="Enter your coupon"
-                          value={coupon}
+                          placeholder="Gift card or discount code"
+                          onChange={onEnterPromoCode}
                         />
-                        <button
-                          class="btn btn-dark-light generate-code"
-                          type="button"
-                          onClick={() => couponSubmit()}
-                        >
-                          Generate Code
-                        </button>
+
                         <button
                           className="btn btn-dark btn-sm w-100"
                           type="submit"
-                          onClick={() => applySubmit()}
-                          disabled={coupondisble}
+                          onClick={checkPromoCode}
                         >
-                          Apply coupon
+                          Apply Coupon
                         </button>
                       </div>
                     </li>
                   </ul>
                 </div>
               </div>
+
+              
             </div>
           </div>
         </section>

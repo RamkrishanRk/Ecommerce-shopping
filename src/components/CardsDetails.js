@@ -179,42 +179,42 @@ const CardsDetails = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-sm-3 pl-sm-0">
+                          <div className="col-sm-3 pl-sm-0">
                             <Link
-                              class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
+                              className="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
                               to="/cart"
                             >
                               Add to cart
                             </Link>
                           </div>
                         </div>
-                        <ul class="list-unstyled small d-inline-block">
-                          <li class="px-3 py-2 mb-1 bg-white">
-                            <strong class="text-uppercase">Offers:</strong>
-                            <span class="ms-2 text-muted">
+                        <ul className="list-unstyled small d-inline-block">
+                          <li className="px-3 py-2 mb-1 bg-white">
+                            <strong className="text-uppercase">Offers:</strong>
+                            <span className="ms-2 text-muted">
                               {discountPercentage <= 0 &&
                                 ` Upto ${discountPercentage}% EMI interest savings on select payments..`}
                               {discountPercentage > 0 &&
                                 ` Upto ${discountPercentage}% EMI interest savings on select payments..`}
                             </span>
                           </li>
-                          <li class="px-3 py-2 mb-1 bg-white">
-                            <strong class="text-uppercase">SKU:</strong>
-                            <span class="ms-2 text-muted">{item?.mpn}</span>
+                          <li className="px-3 py-2 mb-1 bg-white">
+                            <strong className="text-uppercase">SKU:</strong>
+                            <span className="ms-2 text-muted">{item?.mpn}</span>
                           </li>
-                          <li class="px-3 py-2 mb-1 bg-white text-muted">
-                            <strong class="text-uppercase text-dark">
+                          <li className="px-3 py-2 mb-1 bg-white text-muted">
+                            <strong className="text-uppercase text-dark">
                               Category:
                             </strong>
-                            <span class="ms-2 text-muted">
+                            <span className="ms-2 text-muted">
                               {item?.age_group}
                             </span>
                           </li>
-                          <li class="px-3 py-2 mb-1 bg-white text-muted">
-                            <strong class="text-uppercase text-dark">
+                          <li className="px-3 py-2 mb-1 bg-white text-muted">
+                            <strong className="text-uppercase text-dark">
                               Tags:
                             </strong>
-                            <span class="ms-2 text-muted">
+                            <span className="ms-2 text-muted">
                               {item?.category}
                             </span>
                           </li>
@@ -222,13 +222,13 @@ const CardsDetails = () => {
                       </div>
                     </div>
                     <ul
-                      class="nav nav-tabs border-0 description-list-tab"
+                      className="nav nav-tabs border-0 description-list-tab"
                       id="myTab"
                       role="tablist"
                     >
-                      <li class="nav-item">
+                      <li className="nav-item">
                         <a
-                          class="nav-link text-uppercase active"
+                          className="nav-link text-uppercase active"
                           id="description-tab"
                           data-bs-toggle="tab"
                           href="#description"
@@ -239,9 +239,9 @@ const CardsDetails = () => {
                           Description
                         </a>
                       </li>
-                      <li class="nav-item">
+                      <li className="nav-item">
                         <a
-                          class="nav-link text-uppercase"
+                          className="nav-link text-uppercase"
                           id="reviews-tab"
                           data-bs-toggle="tab"
                           href="#reviews"
@@ -253,18 +253,18 @@ const CardsDetails = () => {
                         </a>
                       </li>
                     </ul>
-                    <div class="tab-content mb-5" id="myTabContent">
+                    <div className="tab-content mb-5" id="myTabContent">
                       <div
-                        class="tab-pane fade show active"
+                        className="tab-pane fade show active"
                         id="description"
                         role="tabpanel"
                         aria-labelledby="description-tab"
                       >
-                        <div class="p-4 p-lg-5 bg-white">
-                          <h6 class="text-uppercase fw-bold">
+                        <div className="p-4 p-lg-5 bg-white">
+                          <h6 className="text-uppercase fw-bold">
                             Product description
                           </h6>
-                          <p class="text-muted text-sm mb-0">
+                          <p className="text-muted text-sm mb-0">
                             Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit, sed do eiusmod tempor incididunt ut labore et
                             dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -278,48 +278,48 @@ const CardsDetails = () => {
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        className="tab-pane fade"
                         id="reviews"
                         role="tabpanel"
                         aria-labelledby="reviews-tab"
                       >
-                        <div class="p-4 p-lg-5">
-                          <div class="row">
-                            <div class="col-lg-8">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0">
+                        <div className="p-4 p-lg-5">
+                          <div className="row">
+                            <div className="col-lg-8">
+                              <div className="d-flex">
+                                <div className="flex-shrink-0">
                                   <img
-                                    class="rounded-circle"
+                                    className="rounded-circle"
                                     src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/customer-1.2909e6e3.png"
                                     alt="customer-2.png"
                                     width="50"
                                   />
                                 </div>
-                                <div class="ms-3 flex-shrink-1">
-                                  <h6 class="mb-0 text-uppercase fw-bold">
+                                <div className="ms-3 flex-shrink-1">
+                                  <h6 className="mb-0 text-uppercase fw-bold">
                                     Jane Doe
                                   </h6>
-                                  <p class="small text-muted mb-0 text-uppercase">
+                                  <p className="small text-muted mb-0 text-uppercase">
                                     20 May 2020
                                   </p>
-                                  <ul class="list-inline mb-1 text-xs">
-                                    <li class="list-inline-item m-0">
-                                      <i class="fas fa-star text-warning"></i>
+                                  <ul className="list-inline mb-1 text-xs">
+                                    <li className="list-inline-item m-0">
+                                      <i className="fas fa-star text-warning"></i>
                                     </li>
-                                    <li class="list-inline-item m-0">
-                                      <i class="fas fa-star text-warning"></i>
+                                    <li className="list-inline-item m-0">
+                                      <i className="fas fa-star text-warning"></i>
                                     </li>
-                                    <li class="list-inline-item m-0">
-                                      <i class="fas fa-star text-warning"></i>
+                                    <li className="list-inline-item m-0">
+                                      <i className="fas fa-star text-warning"></i>
                                     </li>
-                                    <li class="list-inline-item m-0">
-                                      <i class="fas fa-star text-warning"></i>
+                                    <li className="list-inline-item m-0">
+                                      <i className="fas fa-star text-warning"></i>
                                     </li>
-                                    <li class="list-inline-item m-0">
-                                      <i class="fas fa-star-half-alt text-warning"></i>
+                                    <li className="list-inline-item m-0">
+                                      <i className="fas fa-star-half-alt text-warning"></i>
                                     </li>
                                   </ul>
-                                  <p class="text-sm mb-0 text-muted">
+                                  <p className="text-sm mb-0 text-muted">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit, sed do eiusmod tempor
                                     incididunt ut labore et dolore magna aliqua.

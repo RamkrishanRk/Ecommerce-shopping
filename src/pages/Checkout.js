@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import { useLocation } from "react-router-dom";
 
 const Checkout = () => {
   const CheckoutData = useSelector((state) => state?.cartreducer?.carts);
@@ -17,6 +18,7 @@ const Checkout = () => {
   useEffect(() => {
     priceData();
   }, [price]);
+
   return (
     <>
       <Layout>
@@ -86,9 +88,9 @@ const Checkout = () => {
                       Country
                     </label>
                     <select id="country" className="form-control rounded-0">
-                      <option value>Choose your country</option>
-                      <option value>India</option>
-                      <option value>Afghanistan</option>
+                      <option>Choose your country</option>
+                      <option>India</option>
+                      <option>Afghanistan</option>
                     </select>
                   </div>
                   <div className="col-lg-12">
@@ -134,19 +136,22 @@ const Checkout = () => {
                       aria-expanded="false"
                       aria-controls="collapseExample"
                     >
-                      <div class="form-check">
+                      <div className="form-check">
                         <input
                           type="checkbox"
-                          class="form-check-input"
+                          className="form-check-input"
                           id="alternateAddress"
                         />
-                        <label class="form-check-label" for="alternateAddress">
+                        <label
+                          className="form-check-label"
+                          for="alternateAddress"
+                        >
                           Alternate billing address
                         </label>
                       </div>
                     </button>
                   </div>
-                  <div class="collapse" id="collapseExample">
+                  <div className="collapse" id="collapseExample">
                     <div className="row gy-3">
                       <div className="col-12 mt-4">
                         <h2 className="h4 text-uppercase mb-4">
@@ -216,9 +221,9 @@ const Checkout = () => {
                           id="countryAlt"
                           className="form-control rounded-0"
                         >
-                          <option value>Choose your country</option>
-                          <option value>India</option>
-                          <option value>Afghanistan</option>
+                          <option>Choose your country</option>
+                          <option>India</option>
+                          <option>Afghanistan</option>
                         </select>
                       </div>
 
