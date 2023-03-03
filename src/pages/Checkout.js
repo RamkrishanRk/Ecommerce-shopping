@@ -1,23 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useLocation } from "react-router-dom";
 
 const Checkout = () => {
-  const CheckoutData = useSelector((state) => state?.cartreducer?.carts);
-  const [price, setPrice] = useState(0);
+  const location = useLocation();
+  const data = location.state?.data;
 
-  const priceData = () => {
-    let price = 0;
-    CheckoutData.map((item) => {
-      price = item?.price + price;
-    });
-    setPrice(price);
+  const [errors, setErrors] = useState({});
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    country: "",
+    address: "",
+    addressalt: "",
+    city: "",
+    state: "",
+  });
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const errors = {};
+    if (!values.firstName) {
+      errors.firstName = "First Name is required!";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Last Name is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    }
+    if (!values.phone) {
+      errors.phone = "Phone is required!";
+    }
+    if (!values.company) {
+      errors.company = "Company is required!";
+    }
+    if (!values.country) {
+      errors.country = "Country is required";
+    }
+    if (!values.address) {
+      errors.address = "Address Line 1 is required";
+    }
+    if (!values.addressalt) {
+      errors.addressalt = "Address Line 2 is required";
+    }
+    if (!values.city) {
+      errors.city = "City is required";
+    }
+    if (!values.state) {
+      errors.state = "State is required";
+    }
+
+    if (Object.keys(errors).length === 0) {
+      localStorage.setItem("payment-details", JSON.stringify(values));
+      navigate("/payment-method");
+    } else {
+      setErrors(errors);
+    }
   };
-  useEffect(() => {
-    priceData();
-  }, [price]);
 
   return (
     <>
@@ -26,260 +70,246 @@ const Checkout = () => {
           <h2 className="h5 text-uppercase mb-4">Shipping Address</h2>
           <div className="row">
             <div className="col-lg-8">
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="row gy-3">
                   <div className="col-lg-6">
-                    <label className="form-label" for="firstName">
+                    <label className="form-label" htmlFor="firstName">
                       First name
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="firstName"
                       placeholder="Enter your first name"
+                      value={values.firstName}
+                      name="firstName"
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          firstName: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.firstName && (
+                      <div className="text-danger mt-2">
+                        {values.firstName.length > 0 ? "" : errors.firstName}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="lastName">
+                    <label className="form-label" htmlFor="lastName">
                       Last name
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="lastName"
                       placeholder="Enter your last name"
+                      name="lastName"
+                      value={values.lastName}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          lastName: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.lastName && (
+                      <div className="text-danger mt-2">
+                        {values.lastName.length > 0 ? "" : errors.lastName}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="email">
+                    <label className="form-label" htmlFor="email">
                       Email address
                     </label>
                     <input
                       className="form-control"
                       type="email"
-                      id="email"
                       placeholder="Jason@example.com"
+                      name="email"
+                      value={values.email}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          email: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.email && (
+                      <div className="text-danger mt-2">
+                        {values.email.length > 0 ? "" : errors.email}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="phone">
+                    <label className="form-label" htmlFor="phone">
                       Phone number
                     </label>
                     <input
                       className="form-control"
                       type="tel"
-                      id="phone"
                       placeholder="+02 245354745"
+                      name="phone"
+                      value={values.phone}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          phone: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.phone && (
+                      <div className="text-danger mt-2">
+                        {values.phone.length > 0 ? "" : errors.phone}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="company">
+                    <label className="form-label" htmlFor="company">
                       Company name (optional)
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="company"
                       placeholder="Your company name"
+                      name="company"
+                      value={values.company}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          company: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.company && (
+                      <div className="text-danger mt-2">
+                        {values.company.length > 0 ? "" : errors.company}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6 form-group">
-                    <label className="form-label" for="country">
+                    <label className="form-label" htmlFor="country">
                       Country
                     </label>
-                    <select id="country" className="form-control rounded-0">
+                    <select
+                      className="form-control rounded-0"
+                      name="country"
+                      value={values.country}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          country: e.target.value,
+                        }));
+                      }}
+                    >
                       <option>Choose your country</option>
-                      <option>India</option>
-                      <option>Afghanistan</option>
+                      <option value="india">India</option>
+                      <option value="afghanistan">Afghanistan</option>
                     </select>
+                    {errors.country && (
+                      <div className="text-danger mt-2">
+                        {values.country.length > 0 ? "" : errors.country}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-12">
-                    <label className="form-label" for="address">
+                    <label className="form-label" htmlFor="address">
                       Address line 1
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="address"
                       placeholder="House number and street name"
+                      name="address"
+                      value={values.address}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          address: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.address && (
+                      <div className="text-danger mt-2">
+                        {values.address.length > 0 ? "" : errors.address}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-12">
-                    <label className="form-label" for="addressalt">
+                    <label className="form-label" htmlFor="addressalt">
                       Address line 2
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="addressalt"
                       placeholder="Apartment, Suite, Unit, etc (optional)"
+                      name="addressalt"
+                      value={values.addressalt}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          addressalt: e.target.value,
+                        }));
+                      }}
                     />
+                    {errors.addressalt && (
+                      <div className="text-danger mt-2">
+                        {values.addressalt.length > 0 ? "" : errors.addressalt}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="city">
+                    <label className="form-label" htmlFor="city">
                       Town/City
                     </label>
-                    <input className="form-control" type="text" id="city" />
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="city"
+                      value={values.city}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          city: e.target.value,
+                        }));
+                      }}
+                    />
+                    {errors.city && (
+                      <div className="text-danger mt-2">
+                        {values.city.length > 0 ? "" : errors.city}
+                      </div>
+                    )}
                   </div>
                   <div className="col-lg-6">
-                    <label className="form-label" for="state">
+                    <label className="form-label" htmlFor="state">
                       State/County
                     </label>
-                    <input className="form-control" type="text" id="state" />
-                  </div>
-                  <div className="col-lg-6">
-                    <button
-                      className="btn btn-link text-dark p-0 shadow-0"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="alternateAddress"
-                        />
-                        <label
-                          className="form-check-label"
-                          for="alternateAddress"
-                        >
-                          Alternate billing address
-                        </label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="state"
+                      value={values.state}
+                      onChange={(e) => {
+                        setValues((prevState) => ({
+                          ...prevState,
+                          state: e.target.value,
+                        }));
+                      }}
+                    />
+                    {errors.state && (
+                      <div className="text-danger mt-2">
+                        {values.state.length > 0 ? "" : errors.state}
                       </div>
-                    </button>
-                  </div>
-                  <div className="collapse" id="collapseExample">
-                    <div className="row gy-3">
-                      <div className="col-12 mt-4">
-                        <h2 className="h4 text-uppercase mb-4">
-                          Alternative billing details
-                        </h2>
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="firstName2">
-                          First name
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="firstName2"
-                          placeholder="Enter your first name"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="lastName2">
-                          Last name
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="lastName2"
-                          placeholder="Enter your last name"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="email2">
-                          Email address
-                        </label>
-                        <input
-                          className="form-control"
-                          type="email"
-                          id="email2"
-                          placeholder="Jason@example.com"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="phone2">
-                          Phone number
-                        </label>
-                        <input
-                          className="form-control"
-                          type="tel"
-                          id="phone2"
-                          placeholder="+02 245354745"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="company2">
-                          Company name (optional)
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="company2"
-                          placeholder="Your company name"
-                        />
-                      </div>
-                      <div className="col-lg-6 form-group">
-                        <label className="form-label" for="countryAlt">
-                          Country
-                        </label>
-                        <select
-                          id="countryAlt"
-                          className="form-control rounded-0"
-                        >
-                          <option>Choose your country</option>
-                          <option>India</option>
-                          <option>Afghanistan</option>
-                        </select>
-                      </div>
-
-                      <div className="col-lg-12">
-                        <label className="form-label" for="address2">
-                          Address line 1
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="address2"
-                          placeholder="House number and street name"
-                        />
-                      </div>
-                      <div className="col-lg-12">
-                        <label className="form-label" for="addressalt2">
-                          Address line 2
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="addressalt2"
-                          placeholder="Apartment, Suite, Unit, etc (optional)"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="city2">
-                          Town/City
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="city2"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label className="form-label" for="state2">
-                          State/County
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="state2"
-                        />
-                      </div>
-                    </div>
+                    )}
                   </div>
                   <div className="col-lg-12 form-group">
-                    <Link to="/success">
-                      <button
-                        className="btn btn-dark"
-                        style={{ borderRadius: 0 }}
-                      >
-                        Place order
-                      </button>
-                    </Link>
+                    <button
+                      className="btn btn-dark"
+                      style={{ borderRadius: 0 }}
+                      state={data}
+                    >
+                      Place order
+                    </button>
                   </div>
                 </div>
               </form>
@@ -287,31 +317,23 @@ const Checkout = () => {
             <div className="col-lg-4">
               <div className="card border-0 rounded-0 p-lg-4 bg-light">
                 <div className="card-body">
-                  <h5 className="text-uppercase mb-4">Your order</h5>
-                  {CheckoutData
-                    ? CheckoutData.map((data) => {
-                        return (
-                          <>
-                            <ul className="list-unstyled mb-0">
-                              <li className="d-flex align-items-center justify-content-between">
-                                <strong className="small fw-bold">
-                                  {data.title}
-                                </strong>
-                                <span className="text-muted small">
-                                  ₹{data.price}
-                                </span>
-                              </li>
-                              <li className="border-bottom my-2"></li>
-                            </ul>
-                          </>
-                        );
-                      })
-                    : ""}
+                  <h5 className="text-uppercase mb-4">Price details</h5>
+
+                  <ul className="list-unstyled mb-0">
+                    <li className="d-flex align-items-center justify-content-between">
+                      <strong className="text-uppercase small fw-bold">
+                        Price (1 item)
+                      </strong>
+                      <span>₹{data}</span>
+                    </li>
+                    <li className="border-bottom my-2"></li>
+                  </ul>
+
                   <li className="d-flex align-items-center justify-content-between">
                     <strong className="text-uppercase small fw-bold">
-                      Total
+                      Total Payable
                     </strong>
-                    <span>₹{price}</span>
+                    <span>₹{data}</span>
                   </li>
                 </div>
               </div>

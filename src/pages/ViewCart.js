@@ -7,7 +7,7 @@ import {
   DecrementItems,
   DeleteItems,
 } from "../redux/actions/AddToCard";
-import ScratchCard from "react-scratch-coupon";
+// import ScratchCard from "react-scratch-coupon";
 import { v4 } from "uuid";
 
 const ViewCart = () => {
@@ -73,35 +73,38 @@ const ViewCart = () => {
   const totalcart = discountPrices
     ? discountPrices?.reduce((sum, a) => sum + a, 0)
     : "";
-
   // coupon
   const uniqe = v4();
 
   const codeId = uniqe?.slice(0, 8);
   const PROMOTIONS = [
     {
-      code: codeId,
+      code: "dsfdf",
       discount: "5%",
     },
   ];
   const [promoCode, setPromoCode] = useState("");
   const [discountPercent, setDiscountPercent] = useState(0);
   const discount = (totalcart * discountPercent) / 100;
+  const TotalPrice = Math.round(totalcart - discount);
+
+  const [dis, setDis] = useState(false);
+
   const onEnterPromoCode = (event) => {
+    setDis(true);
     setPromoCode(event.target.value);
   };
-
   const checkPromoCode = () => {
     for (var i = 0; i < PROMOTIONS.length; i++) {
       if (promoCode === PROMOTIONS[i].code) {
         setDiscountPercent(parseFloat(PROMOTIONS[i].discount.replace("%", "")));
-
         return;
       }
     }
 
     alert("Sorry, the Promotional code you entered is not valid!");
   };
+
   return (
     <>
       <Layout>
@@ -159,11 +162,6 @@ const ViewCart = () => {
                           Total
                         </strong>
                       </th>
-                      {/* <th className="border-0 p-3" scope="col">
-                        <strong className="text-sm text-uppercase">
-                          discount
-                        </strong>
-                      </th> */}
                       <th className="border-0 p-3" scope="col">
                         <strong className="text-sm text-uppercase"></strong>
                       </th>
@@ -234,10 +232,9 @@ const ViewCart = () => {
                                         </svg>
                                       </div>
                                       {data?.qnty}
-                                      {/* {discountPercentage} */}
                                       {/* {data?.qnty > 4 ? (
                                         <ScratchCard>
-                                          <code>{code}</code>
+                                          <code>{codeId}</code>
                                         </ScratchCard>
                                       ) : (
                                         data?.qnty
@@ -264,14 +261,9 @@ const ViewCart = () => {
                                     ₹{discountPrices[ind]}
                                   </p>
                                 </td>
-                                {/* <td className="p-3 align-middle border-0">
-                                  <p className="mb-0 small discount-percentage text-center text-success">
-                                    {`${discountPercentage}% Off`}
-                                  </p>
-                                </td> */}
                                 <td className="p-3 align-middle border-0">
                                   <Link
-                                    className="reset-anchor"
+                                    className="reset-anchor ms-4"
                                     to="/cart"
                                     onClick={() => deleteCart(data?.id)}
                                   >
@@ -299,15 +291,16 @@ const ViewCart = () => {
                         ""
                       )
                     ) : (
-                      <p className="cart-empty">
-                        Your carts is empty
-                        <img src="https://react-redux-cart-youtube.netlify.app/cart.gif" />
-                      </p>
+                      <>
+                        <p className="cart-empty">
+                          Your cart is empty!
+                          <img src="https://react-redux-cart-youtube.netlify.app/cart.gif" />
+                        </p>
+                      </>
                     )}
                   </tbody>
                 </table>
               </div>
-
               <div className="bg-light px-4 py-3">
                 <div className="row align-items-center text-center">
                   <div className="col-md-6 mb-3 mb-md-0 text-md-start">
@@ -329,29 +322,36 @@ const ViewCart = () => {
                       Continue shopping
                     </Link>
                   </div>
-                  <div className="col-md-6 text-md-end">
-                    <Link
-                      className="btn btn-outline-dark btn-sm"
-                      to="/checkout"
-                    >
-                      Procceed to checkout
-                      <svg
-                        width="24px"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
-                          stroke="#000"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                  </div>
+                  {viewCarted.length > 0 ? (
+                    <>
+                      <div className="col-md-6 text-md-end">
+                        <Link
+                          className="btn btn-outline-dark btn-sm"
+                          to="/checkout"
+                          state={{ data: TotalPrice }}
+                        >
+                          Procceed to checkout
+                          <svg
+                            width="24px"
+                            height="24px"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M13.5 8.25L17.25 12M17.25 12L13.5 15.75M17.25 12H6.75"
+                              stroke="#000"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
@@ -367,20 +367,20 @@ const ViewCart = () => {
                       <span className="text-muted small">₹{price}</span>
                     </li>
                     <li className="border-bottom my-2"></li>
-                    {discount > 0 && (
+                    {price - TotalPrice > 0 && (
                       <li className="d-flex align-items-center justify-content-between mb-4">
                         <strong className="text-uppercase small font-weight-bold">
                           Discount
                         </strong>
-                        ₹{Math.round(discount)}
+                        <p className="text-success">₹{price - TotalPrice}</p>
                       </li>
                     )}
 
                     <li className="d-flex align-items-center justify-content-between mb-4">
                       <strong className="text-uppercase small font-weight-bold">
-                        Total
+                        Total Amount
                       </strong>
-                      ₹{Math.round(totalcart - discount)}
+                      ₹{TotalPrice}
                     </li>
                     <li>
                       <div className="position-relative">
@@ -395,6 +395,7 @@ const ViewCart = () => {
                           className="btn btn-dark btn-sm w-100"
                           type="submit"
                           onClick={checkPromoCode}
+                          disabled={!dis}
                         >
                           Apply Coupon
                         </button>
@@ -403,8 +404,6 @@ const ViewCart = () => {
                   </ul>
                 </div>
               </div>
-
-              
             </div>
           </div>
         </section>

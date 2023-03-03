@@ -1,10 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const data = useSelector((state) => state?.cartreducer?.carts);
-
+  const token = JSON.parse(localStorage.getItem("token"));
+  const loginuser = JSON.parse(localStorage.getItem("register"));
+  const navigate = useNavigate();
+  const logouthandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("login");
+    navigate("/");
+  };
   return (
     <>
       <header className="header bg-white">
@@ -46,7 +53,10 @@ const Navbar = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
                   <Link className="nav-link active" to="/">
@@ -57,38 +67,6 @@ const Navbar = () => {
                   <Link className="nav-link" to="/">
                     Shop
                   </Link>
-                </li>
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    id="pagesDropdown"
-                    to="#"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Pages
-                  </Link>
-                  <div
-                    className="dropdown-menu mt-3 shadow-sm"
-                    aria-labelledby="pagesDropdown"
-                  >
-                    <Link className="dropdown-item border-0 transition-link" to="/">
-                      Homepage
-                    </Link>
-                    <Link
-                      className="dropdown-item border-0 transition-link"
-                      to="/cart"
-                    >
-                      Shopping cart
-                    </Link>
-                    <Link
-                      className="dropdown-item border-0 transition-link"
-                      to="/checkout"
-                    >
-                      Checkout
-                    </Link>
-                  </div>
                 </li>
               </ul>
               <ul className="navbar-nav ms-auto">
@@ -107,27 +85,52 @@ const Navbar = () => {
                       ></path>
                     </svg>
                     Cart
-                    <small className="text-gray fw-normal">({data.length})</small>
+                    <small className="text-gray fw-normal">
+                      ({data.length})
+                    </small>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    className="nav-link d-flex align-items-center"
-                    to="#"
-                    data-bs-toggle="modal"
-                    data-bs-target="#productView"
-                  >
-                    <svg
-                      width="18px"
-                      height="18px"
-                      viewBox="-32 0 512 512"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="me-1"
+                  {token ? (
+                    <Link
+                      className="nav-link d-flex align-items-center"
+                      to="#"
+                      onClick={logouthandler}
                     >
-                      <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" />
-                    </svg>
-                    Login
-                  </Link>
+                      <svg
+                        fill="#000000"
+                        width="18px"
+                        height="18px"
+                        viewBox="0 0 42 42"
+                        className="me-1"
+                      >
+                        <path
+                          id="_30.User"
+                          data-name="30.User"
+                          d="M24,45A21,21,0,1,1,45,24,21,21,0,0,1,24,45Zm11.633-6c-.157-.231-.355-.518-.514-.742-.277-.394-.554-.788-.8-1.178C34.305,37.062,32.935,35.224,28,35a2.922,2.922,0,0,1-2.968-3.066L25,31c0-.135-.016.148,0,0V30l1-1a14.435,14.435,0,0,0,2.4-1.464l.135-.093A4.643,4.643,0,0,0,30,26l.036-.381A55.987,55.987,0,0,0,31,19c0-4.71-2.29-7-7-7-4.775,0-7,2.224-7,7a54.693,54.693,0,0,0,.963,6.616l.035.352a3.981,3.981,0,0,0,1.449,1.462l.1.062A19.174,19.174,0,0,0,22,29l1,1v1c.014.138,0-.146,0,0l-.033.934A2.9,2.9,0,0,1,20.084,35h0c-4.956.2-6.393,2.077-6.4,2.077-.252.4-.528.789-.807,1.184-.157.224-.355.51-.513.741a18.917,18.917,0,0,0,23.267,0ZM24,5A18.986,18.986,0,0,0,10.85,37.694c.382-.565.79-1.129,1.15-1.694,0,0,1.67-2.743,8-3,.645,0,.967-.422.967-1.066h0c0-.521,0-.934,0-.934,0-.13-.021-.247-.027-.373A17.5,17.5,0,0,1,18.4,29.133S16,27.657,16,26a60.16,60.16,0,0,1-1-7c0-4.644,1.986-9,9-9,6.92,0,9,4.356,9,9a61.784,61.784,0,0,1-1,7c0,1.611-2.4,3.133-2.4,3.133a13.873,13.873,0,0,1-2.543,1.546c0,.109-.023.209-.023.321,0,0,0,.413,0,.934h0c0,.644.32,1.066.965,1.066,6.424.288,8,3,8,3,.36.565.767,1.129,1.149,1.694A18.985,18.985,0,0,0,24,5Z"
+                          transform="translate(-3 -3)"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                      {loginuser.fName}
+                    </Link>
+                  ) : (
+                    <Link
+                      className="nav-link d-flex align-items-center"
+                      to="/login"
+                    >
+                      <svg
+                        width="18px"
+                        height="18px"
+                        viewBox="-32 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="me-1"
+                      >
+                        <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" />
+                      </svg>
+                      Login
+                    </Link>
+                  )}
                 </li>
               </ul>
             </div>

@@ -7,6 +7,11 @@ import Cencel from "./components/Cencel";
 import Checkout from "./pages/Checkout";
 import ViewCart from "./pages/ViewCart";
 import CartDetail from "./pages/CartDetail";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Delivery from "./pages/ Delivery";
+import EditCheckout from "./pages/EditCheckout";
+// import PrivateRoutes from "./PrivateRoute";
 
 function App() {
   return (
@@ -15,11 +20,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Card />} />
           <Route path="/cart/:id" element={<CardsDetails />} />
+          <Route path="/cart" element={<ViewCart />} />
+          <Route path="/detail" element={<CartDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {/* <Route exact element={<PrivateRoutes />}> */}
+          <Route path="/payment-method" element={<Delivery />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cencel" element={<Cencel />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/cart" element={<ViewCart />} />
-          <Route path="/detail" element={<CartDetail />} />
+          <Route path="/edit-checkout" element={<EditCheckout />} />
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </>
