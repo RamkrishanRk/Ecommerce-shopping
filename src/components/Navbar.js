@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const data = useSelector((state) => state?.cartreducer?.carts);
-  const token = JSON.parse(localStorage.getItem("token"));
-  const loginuser = JSON.parse(localStorage.getItem("register"));
+  const token = localStorage?.getItem("token");
+  const loginuser = JSON.parse(localStorage?.getItem("register"));
   const navigate = useNavigate();
   const logouthandler = () => {
     localStorage.removeItem("token");
@@ -64,7 +64,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link className="nav-link" to="/shoping">
                     Shop
                   </Link>
                 </li>
@@ -86,7 +86,7 @@ const Navbar = () => {
                     </svg>
                     Cart
                     <small className="text-gray fw-normal">
-                      ({data.length})
+                      ({data?.length})
                     </small>
                   </Link>
                 </li>
@@ -112,7 +112,7 @@ const Navbar = () => {
                           fillRule="evenodd"
                         />
                       </svg>
-                      {loginuser.fName}
+                      {loginuser?.fName}
                     </Link>
                   ) : (
                     <Link

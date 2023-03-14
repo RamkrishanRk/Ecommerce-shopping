@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Delivery from "./pages/ Delivery";
 import EditCheckout from "./pages/EditCheckout";
+import Shop from "./pages/Shop";
 // import PrivateRoutes from "./PrivateRoute";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cart/:id" element={<CardsDetails />} />
           <Route path="/cart" element={<ViewCart />} />
           <Route path="/detail" element={<CartDetail />} />
+          <Route path="/shoping" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {/* <Route exact element={<PrivateRoutes />}> */}

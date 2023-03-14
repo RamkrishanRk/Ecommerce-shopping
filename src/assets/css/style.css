@@ -229,6 +229,7 @@
 .product img {
   filter: grayscale(40%);
   transition: all 0.3s;
+  height: 335px;
 }
 
 .product-overlay {
@@ -491,4 +492,14 @@ canvas#js-canvas {
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
+}
+
+._2KpZ6l._3AWRsL {
+  background: #fb641b;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  border: none;
+  color: #fff;
+}
+.dsdsds {
+  display: block !important;
 }
