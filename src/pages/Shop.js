@@ -12,7 +12,7 @@ const Shop = () => {
   const currentRecords = product?.slice(indexOfFirstRecord, indexOfLastRecord);
   const nPages = Math.ceil(product?.length / recordsPerPage);
 
-  const [objectsToShow, setToShow] = useState(currentRecords);
+  const [objectsToShow, setToShow] = useState(product);
 
   const compare = (a, b, ascendingOrder) => {
     if (a < b) {
@@ -26,7 +26,7 @@ const Shop = () => {
 
   const handleChange = (value) => {
     if (value == "none") {
-      setToShow([...currentRecords]);
+      setToShow([...product]);
     } else {
       let toType, toAscending;
       switch (value) {
@@ -38,24 +38,25 @@ const Shop = () => {
           toType = true;
           toAscending = false;
           break;
-        case "high-low":
+        case "high":
           toType = false;
           toAscending = true;
           break;
-        case "low-high":
+        case "low":
           toType = false;
           toAscending = false;
           break;
       }
-      let current = [...currentRecords];
+      let current = [...product];
       current.sort((a, b) =>
         toType
-          ? compare(a.name, b.name, toAscending)
+          ? compare(a.title, b.title, toAscending)
           : compare(a.price, b.price, toAscending)
       );
       setToShow([...current]);
     }
   };
+
   return (
     <React.Fragment>
       <Layout>
@@ -330,32 +331,23 @@ const Shop = () => {
                   <div className="row mb-3 align-items-center">
                     <div className="col-lg-6 mb-2 mb-lg-0">
                       <p className="text-sm text-muted mb-0">
-                        Showing 1–12 of 53 results
+                        Showing {currentPage} - {currentRecords.length} products
+                        of {product.length} products
                       </p>
                     </div>
                     <div className="col-lg-6">
-                      {/* <div>
-                        <select onChange={(e) => handleChange(e.target.value)}>
-                          <option value="none">Default</option>
-                          <option value="ascending">Alphabetically, A-Z</option>
-                          <option value="descending">
-                            Alphabetically, Z-A
-                          </option>
-                          <option value="high">Low to high</option>
-                          <option value="low">High to low</option>
-                        </select>
-                      </div> */}
                       <ul className="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                         <li className="list-inline-item text-muted me-3">
-                          <a className="reset-anchor p-0" href="#!">
+                          <Link className="reset-anchor p-0" to="#">
                             <i className="fas fa-th-large"></i>
-                          </a>
+                          </Link>
                         </li>
                         <li className="list-inline-item text-muted me-3">
-                          <a className="reset-anchor p-0" href="#!">
+                          <Link className="reset-anchor p-0" to="#">
                             <i className="fas fa-th"></i>
-                          </a>
+                          </Link>
                         </li>
+
                         <li className="list-inline-item ">
                           <select
                             onChange={(e) => handleChange(e.target.value)}
@@ -373,11 +365,15 @@ const Shop = () => {
                               minHeight: "35px",
                             }}
                           >
-                            <option>Sort By </option>
-                            <option value="none">Default sorting </option>
-                            <option value="popularity">Popularity </option>
-                            <option value="low-high">Price: Low to High</option>
-                            <option value="high-low">Price: High to Low</option>
+                            <option value="none">Sort By </option>
+                            <option value="ascending">
+                              Alphabetically, A-Z
+                            </option>
+                            <option value="descending">
+                              Alphabetically, Z-A
+                            </option>
+                            <option value="high">Price: Low to High</option>
+                            <option value="low">Price: High to Low</option>
                           </select>
                         </li>
                       </ul>
