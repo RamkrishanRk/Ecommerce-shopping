@@ -73,6 +73,7 @@ const EditCheckout = () => {
                   name="phone"
                   value={formValue.phone}
                   onChange={handleInputChange}
+                  maxLength={10}
                 />
               </div>
               <div className="col-lg-6">
@@ -105,7 +106,7 @@ const EditCheckout = () => {
               </div>
               <div className="col-lg-12">
                 <label className="form-label" htmlFor="address">
-                  Address line 1
+                  Address
                 </label>
                 <input
                   className="form-control"
@@ -117,15 +118,15 @@ const EditCheckout = () => {
                 />
               </div>
               <div className="col-lg-12">
-                <label className="form-label" htmlFor="addressalt">
-                  Address line 2
+                <label className="form-label" htmlFor="zip">
+                  Posta / Zip
                 </label>
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="Apartment, Suite, Unit, etc (optional)"
-                  name="addressalt"
-                  value={formValue.addressalt}
+                  placeholder="Posta / Zip"
+                  name="zip"
+                  value={formValue.zip}
                   onChange={handleInputChange}
                 />
               </div>

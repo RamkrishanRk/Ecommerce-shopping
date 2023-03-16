@@ -71,9 +71,9 @@ const Shop = () => {
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
                       <li className="breadcrumb-item">
-                        <a className="text-dark" href="index.html">
+                        <Link className="text-dark" to="/">
                           Home
-                        </a>
+                        </Link>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -206,6 +206,8 @@ const Shop = () => {
                   <h6 className="text-uppercase mb-4">Price range</h6>
                   <div className="price-range pt-4 mb-5">
                     <div id="range"></div>
+                    <input type="range" className="form-range" />
+
                     <div className="row pt-2">
                       <div className="col-6">
                         <strong className="small fw-bold text-uppercase">
@@ -380,8 +382,8 @@ const Shop = () => {
                     </div>
                   </div>
                   <div className="row">
-                    {objectsToShow
-                      ? objectsToShow?.map((data) => {
+                    {currentRecords
+                      ? currentRecords?.map((data) => {
                           return (
                             <React.Fragment>
                               <div className="col-lg-4 col-sm-6">

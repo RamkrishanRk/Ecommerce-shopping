@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 const Checkout = () => {
   const location = useLocation();
   const data = location.state?.data;
-
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
     firstName: "",
@@ -16,7 +15,7 @@ const Checkout = () => {
     company: "",
     country: "",
     address: "",
-    addressalt: "",
+    zip: "",
     city: "",
     state: "",
   });
@@ -43,10 +42,10 @@ const Checkout = () => {
       errors.country = "Country is required";
     }
     if (!values.address) {
-      errors.address = "Address Line 1 is required";
+      errors.address = "Address  is required";
     }
-    if (!values.addressalt) {
-      errors.addressalt = "Address Line 2 is required";
+    if (!values.zip) {
+      errors.zip = "Posta Zip is required";
     }
     if (!values.city) {
       errors.city = "City is required";
@@ -57,7 +56,7 @@ const Checkout = () => {
 
     if (Object.keys(errors).length === 0) {
       localStorage.setItem("payment-details", JSON.stringify(values));
-      navigate("/payment-method");
+      navigate("/payment-method", { state: data });
     } else {
       setErrors(errors);
     }
@@ -157,6 +156,7 @@ const Checkout = () => {
                           phone: e.target.value,
                         }));
                       }}
+                      maxLength={10}
                     />
                     {errors.phone && (
                       <div className="text-danger mt-2">
@@ -214,7 +214,7 @@ const Checkout = () => {
                   </div>
                   <div className="col-lg-12">
                     <label className="form-label" htmlFor="address">
-                      Address line 1
+                      Address
                     </label>
                     <input
                       className="form-control"
@@ -236,25 +236,25 @@ const Checkout = () => {
                     )}
                   </div>
                   <div className="col-lg-12">
-                    <label className="form-label" htmlFor="addressalt">
-                      Address line 2
+                    <label className="form-label" htmlFor="zip">
+                      Posta / Zip
                     </label>
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Apartment, Suite, Unit, etc (optional)"
-                      name="addressalt"
-                      value={values.addressalt}
+                      placeholder="Posta / Zip"
+                      name="zip"
+                      value={values.zip}
                       onChange={(e) => {
                         setValues((prevState) => ({
                           ...prevState,
-                          addressalt: e.target.value,
+                          zip: e.target.value,
                         }));
                       }}
                     />
-                    {errors.addressalt && (
+                    {errors.zip && (
                       <div className="text-danger mt-2">
-                        {values.addressalt.length > 0 ? "" : errors.addressalt}
+                        {values.zip.length > 0 ? "" : errors.zip}
                       </div>
                     )}
                   </div>
@@ -306,7 +306,6 @@ const Checkout = () => {
                     <button
                       className="btn btn-dark"
                       style={{ borderRadius: 0 }}
-                      state={data}
                     >
                       Place order
                     </button>

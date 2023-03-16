@@ -1,16 +1,106 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import LoginModel from "../components/Model/Login";
+import useRazorpay from "react-razorpay";
 
 const Delivery = () => {
   const items = JSON.parse(localStorage.getItem("payment-details"));
   const token = JSON.parse(localStorage.getItem("token"));
   const loginsuccess = JSON.parse(localStorage.getItem("login"));
   const viewCarted = useSelector((state) => state?.cartreducer?.carts);
-
   const [page, setPage] = useState("");
+
+  const location = useLocation();
+  const data = location.state || {};
+  const Razorpay = useRazorpay();
+
+  const [OrderData, setOrderData] = useState(null);
+  const [newVerState, setNewVerState] = useState(null);
+  const RazorpayApi = (data) => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append(
+        "Cookie",
+        "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTdiY2E4MTI2ZDE3ZjA5NTAyNTc4NCIsImlhdCI6MTY3NjEzMTU0MCwiZXhwIjoxNjgzOTA3NTQwfQ.7WWBjNq0NvJjYv0inTxTt07PFcY_9InWGFzKE2WqfQM"
+      );
+
+      var raw = JSON.stringify({
+        amount: data.amount,
+        currency: data.currency,
+        receipt: data.receipt,
+        notes: {
+          description: data.description,
+        },
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+      };
+
+      fetch("http://localhost:8500/api/v1/payment/create-order", requestOptions)
+        .then((response) => response.json())
+        .then((result) => setOrderData(result));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handlePayment = async (response) => {
+    let res = response?.result?.orders;
+    try {
+      const options = {
+        key: "rzp_test_hiVtgAW1Bt2jQq",
+        amount: res?.amount * 100,
+        currency: res?.currency,
+        name: items?.firstName,
+        order_id: res?.id,
+        order_receipt: "order_rcptid_11",
+        handler: function (response) {
+          setNewVerState(response);
+        },
+        prefill: {
+          name: items?.firstName,
+          email: items?.email,
+          contact: items?.phone,
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+      };
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (OrderData !== null) {
+    setTimeout(() => {
+      handlePayment(OrderData);
+    }, 2000);
+  }
+  if (newVerState !== null) {
+    setOrderData(null);
+    setNewVerState(null);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  }
+
+  const createOrder = (payment) => {
+    const orderDetails = {
+      amount: Math.trunc(payment) * 100,
+      currency: payment?.currency,
+      receipt: payment?.receipt,
+      notes: payment?.notes,
+    };
+    RazorpayApi(orderDetails);
+  };
+
   return (
     <>
       <Layout>
@@ -95,11 +185,11 @@ const Delivery = () => {
                   {token ? (
                     <div>
                       <span className="name-section">
-                        {items?.firstName + items?.lastName}
+                        {items?.firstName + " " + items?.lastName}
                       </span>
                       <span className="phone-section ms-2">
-                        {items?.addressalt} {items?.city} {items?.state}
-                        {items?.address}
+                        {items?.city} {items?.state} {items?.address} -
+                        {items?.zip}
                       </span>
                     </div>
                   ) : (
@@ -258,11 +348,15 @@ const Delivery = () => {
                   </h4>
                   <div className="login-payment-section">
                     <h5>Payment Options</h5>
-                    <div></div>
                   </div>
                 </div>
                 <div className="float-end">
-                  <button className="btn btn-outline-dark">change</button>
+                  <button
+                    onClick={() => createOrder(data)}
+                    className="btn btn-success _2KpZ6l _1seccl _3AWRsL"
+                  >
+                    Pay with Razorpay
+                  </button>
                 </div>
               </div>
             </>
