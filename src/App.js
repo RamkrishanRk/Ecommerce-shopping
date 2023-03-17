@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Delivery from "./pages/ Delivery";
 import EditCheckout from "./pages/EditCheckout";
 import Shop from "./pages/Shop";
+import OrderList from "./pages/OrderList.js";
 // import PrivateRoutes from "./PrivateRoute";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cencel" element={<Cencel />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/edit-checkout" element={<EditCheckout />} />
+          <Route path="/orders" element={<OrderList />} />
           {/* </Route> */}
         </Routes>
       </BrowserRouter>

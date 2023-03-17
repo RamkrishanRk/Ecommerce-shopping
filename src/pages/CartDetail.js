@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Add_Card, DecrementItems } from "../redux/actions/AddToCard";
+import { Add_Card } from "../redux/actions/AddToCard";
 const CartDetail = () => {
   const location = useLocation();
   const data = location.state?.item;
@@ -27,16 +27,32 @@ const CartDetail = () => {
                         id="swiper-wrapper-31dcae3f2894e658"
                       >
                         <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img className="w-100" src={data?.image} alt="image" />
+                          <img
+                            className="w-100"
+                            src={data?.image}
+                            alt="image"
+                          />
                         </div>
                         <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img className="w-100" src={data?.image} alt="image" />
+                          <img
+                            className="w-100"
+                            src={data?.image}
+                            alt="image"
+                          />
                         </div>
                         <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img className="w-100" src={data?.image} alt="image" />
+                          <img
+                            className="w-100"
+                            src={data?.image}
+                            alt="image"
+                          />
                         </div>
                         <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img className="w-100" src={data?.image} alt="image" />
+                          <img
+                            className="w-100"
+                            src={data?.image}
+                            alt="image"
+                          />
                         </div>
                       </div>
                     </div>
@@ -158,9 +174,9 @@ const CartDetail = () => {
                     </Link>
                   </div>
                 </div>
-                <Link className="text-dark p-0 mb-4 d-inline-block" to="/detail">
+                <div className="text-dark p-0 mb-4 d-inline-block">
                   <i className="far fa-heart me-2"></i>Add to wish list
-                </Link>
+                </div>
                 <br />
                 <ul className="list-unstyled small d-inline-block">
                   <li className="px-3 py-2 mb-1 bg-white">
@@ -168,7 +184,9 @@ const CartDetail = () => {
                     <span className="ms-2 text-muted">{data?.mpn}</span>
                   </li>
                   <li className="px-3 py-2 mb-1 bg-white text-muted">
-                    <strong className="text-uppercase text-dark">Category:</strong>
+                    <strong className="text-uppercase text-dark">
+                      Category:
+                    </strong>
                     <Link className="reset-anchor ms-2" to="/detail">
                       {data?.age_group}
                     </Link>

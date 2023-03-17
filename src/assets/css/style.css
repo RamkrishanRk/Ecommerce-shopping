@@ -503,3 +503,37 @@ canvas#js-canvas {
 .dsdsds {
   display: block !important;
 }
+.card-grey-bg {
+  display: flex;
+  flex-direction: unset;
+  padding: 16px;
+  font-size: 14px;
+  transition: box-shadow 0.1s linear;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
+  margin-bottom: 8px;
+  border-radius: 4px;
+  height: 100px;
+}
+.label-success {
+  background-color: #27c24c;
+  min-width: 78px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 20px;
+  border: none;
+  color: #fff;
+}
+.status-label {
+  min-width: 78px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 20px;
+  border: none;
+  color: #58666e;
+  background-color: #edf1f2;
+}

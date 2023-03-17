@@ -83,7 +83,10 @@ const Navbar = () => {
                     className="dropdown-menu mt-3 shadow-sm"
                     aria-labelledby="pagesDropdown"
                   >
-                    <Link className="dropdown-item border-0 transition-link" to="/">
+                    <Link
+                      className="dropdown-item border-0 transition-link"
+                      to="/"
+                    >
                       Homepage
                     </Link>
                     <Link
@@ -100,6 +103,12 @@ const Navbar = () => {
                     </Link>
                     <Link
                       className="dropdown-item border-0 transition-link"
+                      to="/orders"
+                    >
+                      Orders
+                    </Link>
+                    <Link
+                      className="dropdown-item border-0 transition-link"
                       to="/checkout"
                     >
                       Checkout
@@ -111,7 +120,9 @@ const Navbar = () => {
                 <li className="nav-item">
                   <Link to="/cart" className="nav-link">
                     <i className="fas fa-dolly-flatbed me-1 text-gray"></i>Cart
-                    <small className="text-gray fw-normal">({data?.length})</small>
+                    <small className="text-gray fw-normal">
+                      ({data?.length})
+                    </small>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -137,7 +148,8 @@ const Navbar = () => {
                       className="nav-link d-flex align-items-center"
                       to="/login"
                     >
-                      <i className="fas fa-user me-1 text-gray fw-normal"></i> Login
+                      <i className="fas fa-user me-1 text-gray fw-normal"></i>{" "}
+                      Login
                     </Link>
                   </li>
                 )}

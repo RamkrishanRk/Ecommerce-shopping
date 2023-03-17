@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -71,29 +71,30 @@ const Delivery = () => {
           address: "Razorpay Corporate Office",
         },
       };
-      const rzp1 = new Razorpay(options);
-      rzp1.open();
+      let rzp = new Razorpay(options);
+      rzp.open();
     } catch (error) {
       console.log(error);
     }
   };
-
-  if (OrderData !== null) {
-    setTimeout(() => {
+  console.log(OrderData, "OrderData");
+  useEffect(() => {
+    if (OrderData !== null) {
       handlePayment(OrderData);
-    }, 2000);
-  }
+    }
+  }, [OrderData]);
+
   if (newVerState !== null) {
     setOrderData(null);
     setNewVerState(null);
     setTimeout(() => {
-      window.location.href = "/";
+      window.location.href = "/success";
     }, 2000);
   }
 
   const createOrder = (payment) => {
     const orderDetails = {
-      amount: Math.trunc(payment) * 100,
+      amount: payment * 100,
       currency: payment?.currency,
       receipt: payment?.receipt,
       notes: payment?.notes,
@@ -242,6 +243,7 @@ const Delivery = () => {
                                   <p className="desc-section">
                                     {e?.description}
                                   </p>
+                                  {e.id == true}
                                   <p> ₹{e?.price}</p>
                                 </div>
                               </>
@@ -348,6 +350,7 @@ const Delivery = () => {
                   </h4>
                   <div className="login-payment-section">
                     <h5>Payment Options</h5>
+                    <p> ₹{data}</p>
                   </div>
                 </div>
                 <div className="float-end">

@@ -6,7 +6,7 @@ const Success = () => {
   return (
     <>
       <Layout>
-        <div className="container ">
+        <div className="container m-5 pb-4">
           <div className="row">
             <div className="col-md-6 mx-auto mt-5">
               <div className="payment">
