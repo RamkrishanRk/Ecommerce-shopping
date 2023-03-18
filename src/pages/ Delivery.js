@@ -28,7 +28,7 @@ const Delivery = () => {
       );
 
       var raw = JSON.stringify({
-        amount: data.amount,
+        amount: data.amount * 100,
         currency: data.currency,
         receipt: data.receipt,
         notes: {
@@ -54,7 +54,7 @@ const Delivery = () => {
     try {
       const options = {
         key: "rzp_test_hiVtgAW1Bt2jQq",
-        amount: res?.amount * 100,
+        amount: res?.amount,
         currency: res?.currency,
         name: items?.firstName,
         order_id: res?.id,
@@ -94,7 +94,7 @@ const Delivery = () => {
 
   const createOrder = (payment) => {
     const orderDetails = {
-      amount: payment * 100,
+      amount: payment,
       currency: payment?.currency,
       receipt: payment?.receipt,
       notes: payment?.notes,

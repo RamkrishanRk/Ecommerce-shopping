@@ -38,8 +38,9 @@ const OrderList = () => {
         <div className="grey-bg container mt-5 mb-4">
           <div className="row">
             <div className="col-xl-12 col-md-12">
-              {data
-                ? data?.map((item) => {
+              {data?.length ? (
+                data ? (
+                  data?.map((item) => {
                     console.log(item, "data");
                     return (
                       <div className="card-grey-bg justify-content-sm-between align-items-center">
@@ -52,7 +53,14 @@ const OrderList = () => {
                       </div>
                     );
                   })
-                : ""}
+                ) : (
+                  ""
+                )
+              ) : (
+                <div className="card-grey-bg justify-content-sm-between align-items-center">
+                  <h6 className="card-details">No Data found</h6>
+                </div>
+              )}
             </div>
           </div>
         </div>

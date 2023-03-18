@@ -1,7 +1,6 @@
-import { API_URL } from "./config";
-import { LOGIN_SUCCESS } from "./type";
+import { LOGIN_SUCCESS, LOGIN_FAIL } from "./type";
 
-export const login = () => () => {
+const LoginAuth = (data) => {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append(
@@ -10,21 +9,21 @@ export const login = () => () => {
   );
 
   var raw = JSON.stringify({
-    userName: "daman",
-    email: "daman@gmail.com",
-    password: "123",
-    passwordConfirm: "123",
+    email: data.email,
+    password: data.password,
+    passwordConfirm: data.password,
   });
 
   var requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: "follow",
   };
 
-  fetch(`${API_URL}/api/v1/users/signup`, requestOptions)
-    .then((response) => response.jon())
+  fetch("http://localhost:8500/api/v1/users/login", requestOptions)
+    .then((response) => response.json())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
 };
+
+export default LoginAuth;
