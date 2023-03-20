@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
-import LoginModel from "../components/Model/Login";
 import useRazorpay from "react-razorpay";
 
 const Delivery = () => {
@@ -106,66 +105,11 @@ const Delivery = () => {
     <>
       <Layout>
         <div className="container py-5">
-          <div className="shadow payment-details">
-            <div className="float-start d-flex">
-              <h4>
-                <span>1</span>
-              </h4>
-              <div className="login-payment-section">
-                {token ? (
-                  <>
-                    <div className="d-flex">
-                      <h5>Login</h5>
-                      <svg
-                        height="16px"
-                        width="16px"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="_1t8m48 mt-1"
-                      >
-                        <path
-                          d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
-                          stroke="#2974f0"
-                        ></path>
-                      </svg>
-                    </div>
-                  </>
-                ) : (
-                  <h5>Login</h5>
-                )}
-                <div>
-                  <span className="phone-section ms-2">
-                    {loginsuccess?.email}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="float-end">
-              <LoginModel modalId={"exampleModal"} />
-              {token ? (
-                <button
-                  className="btn btn-outline-dark"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  change
-                </button>
-              ) : (
-                <button
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  className="btn btn-dark"
-                >
-                  Login
-                </button>
-              )}
-            </div>
-          </div>
           {token ? (
             <div className="shadow payment-details">
               <div className="float-start d-flex">
                 <h4>
-                  <span>2</span>
+                  <span>1</span>
                 </h4>
                 <div className="login-payment-section">
                   <div className="d-flex">

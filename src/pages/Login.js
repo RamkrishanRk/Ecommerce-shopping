@@ -1,12 +1,14 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
-import LoginAuth from "../redux/actions/auth";
+import { loginUser } from "../redux/actions/auth";
 import { Formik } from "formik";
+import { SigninSchema } from "../components/Validation";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -16,8 +18,14 @@ const Login = () => {
             <h2>Sign in to your account</h2>
             <Formik
               initialValues={{ email: "", password: "", passwordConfirm: "" }}
-              onSubmit={(values, { setSubmitting }) => {
-                LoginAuth(values);
+              validationSchema={SigninSchema}
+              validateOnChange={false}
+              validateOnBlur={false}
+              onSubmit={(values) => {
+                dispatch(loginUser(values));
+                // setTimeout(() => {
+                //   navigate("/");
+                // }, 2000);
               }}
             >
               {({
@@ -27,7 +35,6 @@ const Login = () => {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
@@ -42,6 +49,11 @@ const Login = () => {
                       onBlur={handleBlur}
                       value={values.email}
                     />
+                    {errors.email && touched.email ? (
+                      <div className="text-danger mt-1">
+                        <small>{errors.email}</small>
+                      </div>
+                    ) : null}
                   </div>
                   <div className="mb-3 position-relative">
                     <label htmlFor="password" className="form-label">
@@ -55,6 +67,11 @@ const Login = () => {
                       onBlur={handleBlur}
                       value={values.password}
                     />
+                    {errors.password && touched.password ? (
+                      <div className="text-danger mt-1">
+                        <small>{errors.password}</small>
+                      </div>
+                    ) : null}
                   </div>
                   <button type="submit" className="btn btn-dark">
                     Sign in

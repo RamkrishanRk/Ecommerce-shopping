@@ -537,3 +537,15 @@ canvas#js-canvas {
   color: #58666e;
   background-color: #edf1f2;
 }
+.hljs-string .react-tel-input .form-control {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.hljs-string .flag-dropdown {
+  border: none;
+  margin: 6px 0px;
+}
+.hljs-string .form-control:focus {
+  box-shadow: unset;
+}

@@ -139,7 +139,7 @@ const Navbar = () => {
                       onClick={logouthandler}
                     >
                       <i className="fas fa-user me-1 text-gray fw-normal"></i>
-                      {loginuser?.fName}
+                      Profile
                     </Link>
                   </li>
                 ) : (

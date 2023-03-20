@@ -13,9 +13,10 @@ import Delivery from "./pages/ Delivery";
 import EditCheckout from "./pages/EditCheckout";
 import Shop from "./pages/Shop";
 import OrderList from "./pages/OrderList.js";
-// import PrivateRoutes from "./PrivateRoute";
+import PrivateRoutes from "./PrivateRoute";
 
 function App() {
+  
   return (
     <>
       <BrowserRouter>
@@ -27,14 +28,14 @@ function App() {
           <Route path="/shoping" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          {/* <Route exact element={<PrivateRoutes />}> */}
-          <Route path="/payment-method" element={<Delivery />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/cencel" element={<Cencel />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/edit-checkout" element={<EditCheckout />} />
           <Route path="/orders" element={<OrderList />} />
-          {/* </Route> */}
+          <Route element={<PrivateRoutes />}>
+            <Route path="/payment-method" element={<Delivery />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/cencel" element={<Cencel />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/edit-checkout" element={<EditCheckout />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
