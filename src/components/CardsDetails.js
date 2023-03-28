@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Add_Card, DecrementItems } from "../redux/actions/AddToCard";
+import { Add_Card, DecrementItems } from "../redux/actions/card";
 
-const CardsDetails = () => {
+const CardsDetails = (props) => {
   const { id } = useParams();
-  const data = useSelector((state) => state?.cartreducer?.carts);
+  const data = useSelector((state) => state?.cartReducer?.carts);
   const [user, setUser] = useState([]);
 
   const UseData = () => {
@@ -54,6 +54,19 @@ const CardsDetails = () => {
     const exactDis = (amount * discountPercentage) / 100;
     return Math.round(amount * quantity - exactDis);
   };
+  const [activeImage, setActiveImage] = useState(null);
+
+  const handleMouseOver = (event) => {
+    const thumbnail = event.target;
+    setActiveImage(thumbnail.src);
+  };
+
+  const thumbnails = [
+    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-2.62056b28.jpg",
+    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-1.023bc49d.jpg",
+    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-2.62056b28.jpg",
+    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-1.023bc49d.jpg",
+  ];
   return (
     <>
       <Layout>
@@ -67,61 +80,31 @@ const CardsDetails = () => {
                       <div className="col-lg-6">
                         <div className="row m-sm-0">
                           <div className="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
-                            <div className="swiper product-slider-thumbs">
-                              <div className="swiper-wrapper">
-                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
-                                  <img
-                                    className="w-100"
-                                    src={item?.image}
-                                    alt="image01"
-                                  />
-                                </div>
-                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
-                                  <img
-                                    className="w-100"
-                                    src={item?.image}
-                                    alt="image02"
-                                  />
-                                </div>
-                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
-                                  <img
-                                    className="w-100"
-                                    src={item?.image}
-                                    alt="image03"
-                                  />
-                                </div>
-                                <div className="swiper-slide h-auto swiper-thumb-item mb-3">
-                                  <img
-                                    className="w-100"
-                                    src={item?.image}
-                                    alt="image04"
-                                  />
+                            <div id="slide-wrapper">
+                              <div id="slider">
+                                <div className="thumbnails">
+                                  {thumbnails.map((thumbnail) => (
+                                    <img
+                                      key={thumbnail}
+                                      className={`thumbnail ${
+                                        thumbnail === activeImage
+                                          ? "active"
+                                          : ""
+                                      }`}
+                                      src={thumbnail}
+                                      onMouseOver={handleMouseOver}
+                                    />
+                                  ))}
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className="col-sm-10 order-1 order-sm-2">
-                            <div className="swiper product-slider">
-                              <div className="swiper-wrapper">
-                                <div className="swiper-slide h-auto">
-                                  <a
-                                    className="glightbox product-view"
-                                    data-gallery="gallery2"
-                                    data-glightbox="Product item 1"
-                                  >
-                                    <img
-                                      style={{
-                                        width: "100%",
-                                        height: "445px",
-                                        objectFit: "cover",
-                                        maxWidth: "100%",
-                                      }}
-                                      src={item?.image}
-                                      alt="image03"
-                                    />
-                                  </a>
-                                </div>
-                              </div>
+                            <div>
+                              <img
+                                id="featured"
+                                src={activeImage || thumbnails[0]}
+                              />
                             </div>
                           </div>
                         </div>

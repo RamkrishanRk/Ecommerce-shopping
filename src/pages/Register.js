@@ -19,6 +19,7 @@ const Register = () => {
                 phone: "",
                 email: "",
                 password: "",
+                passwordConfirm: "",
               }}
               validationSchema={SignupSchema}
               validateOnChange={false}

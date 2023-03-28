@@ -56,7 +56,7 @@ const Shop = () => {
       setToShow([...current]);
     }
   };
-
+  
   return (
     <React.Fragment>
       <Layout>
@@ -99,34 +99,34 @@ const Shop = () => {
                   </div>
                   <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Women's T-Shirts
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Men's T-Shirts
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Dresses
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Novelty socks
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Women's sunglasses
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Men's sunglasses
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <div className="py-2 px-4 bg-light mb-3">
@@ -136,34 +136,34 @@ const Shop = () => {
                   </div>
                   <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Shavers
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         bags
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Cosmetic
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Nail Art
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Skin Masks &amp; Peels
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Korean cosmetics
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <div className="py-2 px-4 bg-light mb-3">
@@ -173,34 +173,34 @@ const Shop = () => {
                   </div>
                   <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal mb-5">
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Electronics
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         USB Flash drives
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Headphones
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Portable speakers
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Cell Phone bluetooth headsets
-                      </a>
+                      </Link>
                     </li>
                     <li className="mb-2">
-                      <a className="reset-anchor" href="#!">
+                      <Link className="reset-anchor" to="#">
                         Keyboards
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <h6 className="text-uppercase mb-4">Price range</h6>
@@ -406,7 +406,7 @@ const Shop = () => {
                                         <li className="list-inline-item m-0 p-0">
                                           <a
                                             className="btn btn-sm btn-outline-dark"
-                                            href="#!"
+                                            to="#"
                                           >
                                             <i className="far fa-heart"></i>
                                           </a>
@@ -422,7 +422,7 @@ const Shop = () => {
                                         <li className="list-inline-item mr-0">
                                           <a
                                             className="btn btn-sm btn-outline-dark"
-                                            href="#productView"
+                                            to="#productView"
                                             data-bs-toggle="modal"
                                           >
                                             <i className="fas fa-expand"></i>

@@ -32,6 +32,7 @@ const OrderList = () => {
         return "primary";
     }
   };
+
   return (
     <React.Fragment>
       <Layout>
@@ -41,7 +42,6 @@ const OrderList = () => {
               {data?.length ? (
                 data ? (
                   data?.map((item) => {
-                    console.log(item, "data");
                     return (
                       <div className="card-grey-bg justify-content-sm-between align-items-center">
                         <h6 className="card-details">{item?.id}</h6>

@@ -27,6 +27,8 @@ export const loginUser =
       });
       if (response?.data?.status === "success") {
         localStorage.setItem("token", response?.data?.token);
+        localStorage.setItem("userId", response?.data?.id);
+
         toast.success(response?.data.message);
         setTimeout(() => {
           return (window.location.href = "/");
@@ -47,6 +49,7 @@ export const signupUser =
       phone,
       email,
       password,
+      passwordConfirm: password,
     });
 
     let config = {
@@ -66,7 +69,6 @@ export const signupUser =
         payload: response.data,
       });
       if (response?.data?.status === "success") {
-        localStorage.setItem("token", response?.data?.token);
         toast.success(response?.data.message);
         setTimeout(() => {
           return (window.location.href = "/login");

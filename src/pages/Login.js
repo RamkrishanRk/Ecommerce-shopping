@@ -4,11 +4,9 @@ import Layout from "../components/Layout";
 import { loginUser } from "../redux/actions/auth";
 import { Formik } from "formik";
 import { SigninSchema } from "../components/Validation";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   return (
     <>
@@ -23,9 +21,6 @@ const Login = () => {
               validateOnBlur={false}
               onSubmit={(values) => {
                 dispatch(loginUser(values));
-                // setTimeout(() => {
-                //   navigate("/");
-                // }, 2000);
               }}
             >
               {({
@@ -81,7 +76,7 @@ const Login = () => {
             </Formik>
             <p>
               Forgot your password? Not a member?
-              <Link to="/register">Register in here</Link>
+              <Link to="/register"> Register in here</Link>
             </p>
           </div>
         </div>

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import useRazorpay from "react-razorpay";
+import shortid from "shortid";
+import { getUsers } from "../redux/actions/users";
 
 const Delivery = () => {
   const items = JSON.parse(localStorage.getItem("payment-details"));
-  const token = JSON.parse(localStorage.getItem("token"));
-  const loginsuccess = JSON.parse(localStorage.getItem("login"));
-  const viewCarted = useSelector((state) => state?.cartreducer?.carts);
-  const [page, setPage] = useState("");
+  const token = localStorage.getItem("token");
+  const viewCarted = useSelector((state) => state?.cartReducer?.carts);
+  const user_details = useSelector((state) => state?.userReducer?.user);
 
+  const [page, setPage] = useState("");
   const location = useLocation();
   const data = location.state || {};
   const Razorpay = useRazorpay();
@@ -31,8 +33,9 @@ const Delivery = () => {
         currency: data.currency,
         receipt: data.receipt,
         notes: {
-          description: data.description,
+          description: "Thanks for purchasing",
         },
+        payment_capture: 1,
       });
 
       var requestOptions = {
@@ -67,7 +70,7 @@ const Delivery = () => {
           contact: items?.phone,
         },
         notes: {
-          address: "Razorpay Corporate Office",
+          address: "Thanks for purchasing",
         },
       };
       let rzp = new Razorpay(options);
@@ -76,7 +79,6 @@ const Delivery = () => {
       console.log(error);
     }
   };
-  console.log(OrderData, "OrderData");
   useEffect(() => {
     if (OrderData !== null) {
       handlePayment(OrderData);
@@ -94,12 +96,17 @@ const Delivery = () => {
   const createOrder = (payment) => {
     const orderDetails = {
       amount: payment,
-      currency: payment?.currency,
-      receipt: payment?.receipt,
-      notes: payment?.notes,
+      currency: "INR",
+      receipt: shortid.generate(),
+      notes: "Thanks for purchasing",
     };
     RazorpayApi(orderDetails);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+  const userData = user_details?.data?.allUsers;
 
   return (
     <>
@@ -129,13 +136,17 @@ const Delivery = () => {
                   </div>
                   {token ? (
                     <div>
-                      <span className="name-section">
-                        {items?.firstName + " " + items?.lastName}
-                      </span>
-                      <span className="phone-section ms-2">
-                        {items?.city} {items?.state} {items?.address} -
-                        {items?.zip}
-                      </span>
+                      <>
+                        <span className="name-section">
+                          {userData?.[1]?.userName}
+                        </span>
+                        <span className="phone-section ms-2">
+                          {userData?.[1]?.city} {userData?.[1]?.state}{" "}
+                          {userData?.[1]?.address} -{userData?.[1]?.zip} Phone
+                          number:
+                          {userData?.[1]?.phone}
+                        </span>
+                      </>
                     </div>
                   ) : (
                     <h5>Delivery Address</h5>
@@ -171,8 +182,9 @@ const Delivery = () => {
                   <div className="login-order-section">
                     <h5>Order Summary</h5>
                     <div className="d-flex">
-                      {viewCarted
-                        ? viewCarted?.map((e) => {
+                      {viewCarted?.length > 0 ? (
+                        viewCarted ? (
+                          viewCarted?.map((e) => {
                             return (
                               <>
                                 <div className="d-flex">
@@ -193,7 +205,28 @@ const Delivery = () => {
                               </>
                             );
                           })
-                        : ""}
+                        ) : null
+                      ) : (
+                        <>
+                          <div className="d-flex">
+                            <img
+                              src={data?.data?.image}
+                              style={{ width: "100px" }}
+                            />
+                          </div>
+                          <div className="ms-5">
+                            <h5 className="name-section">
+                              {data?.data?.title}
+                            </h5>
+                            <h6>{data?.data?.sub_title}</h6>
+                            <p className="desc-section">
+                              {data?.data?.description}
+                            </p>
+                            {data?.data.id == true}
+                            <p> ₹{data?.data?.price}</p>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -260,7 +293,7 @@ const Delivery = () => {
                 <div className="float-start">
                   <p>
                     Order confirmation email will be sent to
-                    <b> {loginsuccess?.email}</b>
+                    <b> {userData?.[0]?.email}</b>
                   </p>
                 </div>
                 <div className="float-end">
@@ -276,15 +309,11 @@ const Delivery = () => {
               <div className="shadow payment-details">
                 <div className="float-start"></div>
                 <div className="float-end">
-                  <button className="btn btn-success"></button>
-                </div>
-                <div className="float-end">
                   <button className="btn btn-outline-dark">change</button>
                 </div>
               </div>
             )
           ) : null}
-
           {page === "MAIN_PAGE" ? (
             <>
               <div className="shadow payment-details">
@@ -294,12 +323,12 @@ const Delivery = () => {
                   </h4>
                   <div className="login-payment-section">
                     <h5>Payment Options</h5>
-                    <p> ₹{data}</p>
+                    <p> ₹{data?.data?.price}</p>
                   </div>
                 </div>
                 <div className="float-end">
                   <button
-                    onClick={() => createOrder(data)}
+                    onClick={() => createOrder(data?.data?.price)}
                     className="btn btn-success _2KpZ6l _1seccl _3AWRsL"
                   >
                     Pay with Razorpay

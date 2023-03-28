@@ -14,9 +14,9 @@ import EditCheckout from "./pages/EditCheckout";
 import Shop from "./pages/Shop";
 import OrderList from "./pages/OrderList.js";
 import PrivateRoutes from "./PrivateRoute";
+import ProfileBoi from "./pages/ProfileBoi";
 
 function App() {
-  
   return (
     <>
       <BrowserRouter>
@@ -28,6 +28,7 @@ function App() {
           <Route path="/shoping" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<ProfileBoi />} />
           <Route path="/orders" element={<OrderList />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/payment-method" element={<Delivery />} />

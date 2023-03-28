@@ -2,16 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import {
-  Add_Card,
-  DecrementItems,
-  DeleteItems,
-} from "../redux/actions/AddToCard";
+import { Add_Card, DecrementItems, DeleteItems } from "../redux/actions/card";
 // import ScratchCard from "react-scratch-coupon";
 import { v4 } from "uuid";
 
 const ViewCart = () => {
-  const viewCarted = useSelector((state) => state?.cartreducer?.carts);
+  const viewCarted = useSelector((state) => state?.cartReducer?.carts);
+  const user_details = useSelector((state) => state?.userReducer?.user);
+
   const dispatch = useDispatch();
   const [price, setPrice] = useState(0);
 
@@ -20,7 +18,6 @@ const ViewCart = () => {
     dispatch(DeleteItems(id));
     navigate("/");
   };
-
   var discountPercentage;
   const getDiscountPercentage = (quantity, amount) => {
     switch (quantity) {
@@ -104,6 +101,10 @@ const ViewCart = () => {
 
     alert("Sorry, the Promotional code you entered is not valid!");
   };
+
+  const otherPage = user_details?.data?.user;
+  const pageData = [];
+  pageData.push(otherPage);
 
   return (
     <>
@@ -218,7 +219,7 @@ const ViewCart = () => {
                                             : () => DecrementToCart(data)
                                         }
                                       >
-                                        <i class="fas fa-caret-left me-2"></i>
+                                        <i className="fas fa-caret-left me-2"></i>
                                       </div>
                                       {data?.qnty}
                                       {/* {data?.qnty > 4 ? (
@@ -232,7 +233,7 @@ const ViewCart = () => {
                                         className="inc-btn p-0"
                                         onClick={() => addToCart(data)}
                                       >
-                                        <i class="fas fa-caret-right ms-2"></i>
+                                        <i className="fas fa-caret-right ms-2"></i>
                                       </div>
                                     </div>
                                   </div>
@@ -286,25 +287,38 @@ const ViewCart = () => {
                 <div className="row align-items-center text-center">
                   <div className="col-md-6 mb-3 mb-md-0 text-md-start">
                     <Link className="btn btn-link p-0 text-dark btn-sm" to="/">
-                      <i class="fas fa-long-arrow-alt-left me-2"></i>
+                      <i className="fas fa-long-arrow-alt-left me-2"></i>
                       Continue shopping
                     </Link>
                   </div>
-                  {viewCarted.length > 0 ? (
+                  {pageData.length > 0 ? (
+                    viewCarted.length > 0 ? (
+                      <>
+                        <div className="col-md-6 text-md-end">
+                          <Link
+                            className="btn btn-outline-dark btn-sm"
+                            to="/checkout"
+                            state={{ data: TotalPrice }}
+                          >
+                            Procceed to checkout
+                            <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                          </Link>
+                        </div>
+                      </>
+                    ) : null
+                  ) : (
                     <>
                       <div className="col-md-6 text-md-end">
                         <Link
                           className="btn btn-outline-dark btn-sm"
-                          to="/checkout"
+                          to="/payment-method"
                           state={{ data: TotalPrice }}
                         >
                           Procceed to checkout
-                          <i class="fas fa-long-arrow-alt-right ms-2"></i>
+                          <i className="fas fa-long-arrow-alt-right ms-2"></i>
                         </Link>
                       </div>
                     </>
-                  ) : (
-                    ""
                   )}
                 </div>
               </div>

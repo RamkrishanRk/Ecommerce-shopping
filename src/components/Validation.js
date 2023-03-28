@@ -6,7 +6,7 @@ export const SignupSchema = Yup.object().shape({
   userName: Yup.string().required("Enter your name"),
   phone: Yup.string()
     .required("Enter your Phone number")
-    .matches(phoneRegExp, "Phone number is not valid")
+    .matches(phoneRegExp, "phone number is not valid")
     .min(10, "too short")
     .max(10, "too long"),
   email: Yup.string().email("Invalid email").required("Enter your Email"),
@@ -19,4 +19,19 @@ export const SignupSchema = Yup.object().shape({
 export const SigninSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Enter your Email"),
   password: Yup.string().required("Enter your Password"),
+});
+
+export const DeliveryAddress = Yup.object().shape({
+  userName: Yup.string().required("Enter your name"),
+  phone: Yup.string()
+    .required("Enter your phone number")
+    .matches(phoneRegExp, "phone number is not valid")
+    .min(10, "too short")
+    .max(10, "too long"),
+  companyName: Yup.string().required("Enter your company name"),
+  country: Yup.string().required("Enter your country"),
+  address: Yup.string().required("Enter your address"),
+  zip: Yup.string().required("Enter your zip"),
+  city: Yup.string().required("Enter your city"),
+  state: Yup.string().required("Enter your state"),
 });

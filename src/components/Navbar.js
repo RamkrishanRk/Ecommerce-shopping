@@ -3,13 +3,12 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const data = useSelector((state) => state?.cartreducer?.carts);
+  const data = useSelector((state) => state?.cartReducer?.carts);
+
   const token = localStorage?.getItem("token");
-  const loginuser = JSON.parse(localStorage?.getItem("register"));
   const navigate = useNavigate();
   const logouthandler = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("login");
     navigate("/");
   };
   return (

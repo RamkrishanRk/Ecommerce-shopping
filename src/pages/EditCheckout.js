@@ -36,19 +36,7 @@ const EditCheckout = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="col-lg-6">
-                <label className="form-label" htmlFor="lastName">
-                  Last name
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Enter your last name"
-                  name="lastName"
-                  value={formValue.lastName}
-                  onChange={handleInputChange}
-                />
-              </div>
+             
               <div className="col-lg-6">
                 <label className="form-label" htmlFor="email">
                   Email address

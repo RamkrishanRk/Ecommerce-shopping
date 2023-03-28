@@ -1,8 +1,9 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Add_Card } from "../redux/actions/AddToCard";
+import { Add_Card } from "../redux/actions/card";
+import { getUsers } from "../redux/actions/users";
 const CartDetail = () => {
   const location = useLocation();
   const data = location.state?.item;
@@ -11,6 +12,26 @@ const CartDetail = () => {
   const addToCart = (e) => {
     dispatch(Add_Card(e));
   };
+  const dataUser = useSelector((state) => state?.userReducer?.user);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+  const pageData = dataUser?.data?.allUsers;
+  const userId = localStorage.getItem("userId");
+
+  let thumbnails = document.getElementsByClassName("thumbnail");
+  let activeImages = document.getElementsByClassName("active");
+
+  for (var i = 0; i < thumbnails.length; i++) {
+    thumbnails[i].addEventListener("mouseover", function () {
+      if (activeImages.length > 0) {
+        activeImages[0].classList.remove("active");
+      }
+      this.classList.add("active");
+      document.getElementById("featured").src = this.src;
+    });
+  }
 
   return (
     <>
@@ -21,102 +42,46 @@ const CartDetail = () => {
               <div className="col-lg-6">
                 <div className="row m-sm-0">
                   <div className="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
-                    <div className="swiper product-slider-thumbs swiper-initialized swiper-vertical swiper-pointer-events swiper-thumbs">
-                      <div
-                        className="swiper-wrapper dsdsds"
-                        id="swiper-wrapper-31dcae3f2894e658"
-                      >
-                        <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img
-                            className="w-100"
-                            src={data?.image}
-                            alt="image"
-                          />
-                        </div>
-                        <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img
-                            className="w-100"
-                            src={data?.image}
-                            alt="image"
-                          />
-                        </div>
-                        <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img
-                            className="w-100"
-                            src={data?.image}
-                            alt="image"
-                          />
-                        </div>
-                        <div className="swiper-slide h-auto  swiper-thumb-item mb-3">
-                          <img
-                            className="w-100"
-                            src={data?.image}
-                            alt="image"
-                          />
-                        </div>
+                    <div id="slide-wrapper">
+                      <div id="slider">
+                        <img class="thumbnail" src="images/preset1.png" />
+                        <img class="thumbnail" src={data?.image} />
+                        <img class="thumbnail" src="images/preset1.png" />
+                        <img class="thumbnail" src={data?.image} />
                       </div>
                     </div>
                   </div>
                   <div className="col-sm-10 order-1 order-sm-2">
-                    <div className="swiper product-slider ">
-                      <div className="swiper-wrapper">
-                        <div className="swiper-slide h-auto ">
-                          <a
-                            className="glightbox product-view"
-                            href="#"
-                            data-gallery="gallery2"
-                            data-glightbox="Product item 1"
-                          >
-                            <img
-                              className="img-fluid"
-                              src={data?.image}
-                              alt="image"
-                            />
-                          </a>
-                        </div>
-                        <div className="swiper-slide h-auto ">
-                          <a
-                            className="glightbox product-view"
-                            href="#"
-                            data-gallery="gallery2"
-                            data-glightbox="Product item 2"
-                          >
-                            <img
-                              className="img-fluid"
-                              src={data?.image}
-                              alt="image"
-                            />
-                          </a>
-                        </div>
-                        <div className="swiper-slide h-auto ">
-                          <a
-                            className="glightbox product-view"
-                            href="#"
-                            data-gallery="gallery2"
-                            data-glightbox="Product item 3"
-                          >
-                            <img
-                              className="img-fluid"
-                              src="https://rukminim1.flixcart.com/image/400/400/kq8dua80/shoe/c/d/i/7-95000215-41-roamra-white-original-imag4ahytjmqdzz8.jpeg?q=70"
-                              alt="image"
-                            />
-                          </a>
-                        </div>
-                        <div className="swiper-slide h-auto ">
-                          <a
-                            className="glightbox product-view"
-                            href="#"
-                            data-gallery="gallery2"
-                            data-glightbox="Product item 4"
-                          >
-                            <img
-                              className="img-fluid"
-                              src={data?.image}
-                              alt="image"
-                            />
-                          </a>
-                        </div>
-                      </div>
+                    <img id="featured" src={data?.image} />
+                    <div className="addcart-btn mt-3">
+                      <Link
+                        className="btn btn-dark"
+                        to="/cart"
+                        onClick={() => addToCart(data)}
+                      >
+                        <i
+                          class="fa fa-shopping-cart me-2 mb-1"
+                          aria-hidden="true"
+                        ></i>
+                        Add To Cart
+                      </Link>
+                      {userId ? (
+                        <Link
+                          className="btn btn-primary"
+                          to="/payment-method"
+                          state={{ data: data }}
+                        >
+                          <i
+                            class="fa fa-bolt me-2 mb-1"
+                            aria-hidden="true"
+                          ></i>
+                          Buy Now
+                        </Link>
+                      ) : (
+                        <Link className="btn btn-primary" to="/checkout">
+                          Buy Now
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -143,37 +108,7 @@ const CartDetail = () => {
                 <h1>{data?.title}</h1>
                 <p className="text-muted lead">₹{(data?.qnty, data?.price)}</p>
                 <p className="text-sm mb-4">{data?.description}</p>
-                <div className="row align-items-stretch mb-4">
-                  <div className="col-sm-5 pr-sm-0">
-                    <div className="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white">
-                      <span className="small text-uppercase text-gray mr-4 no-select">
-                        Quantity
-                      </span>
-                      <div className="quantity">
-                        <button className="dec-btn p-0">
-                          <i className="fas fa-caret-left"></i>
-                        </button>
-                        <input
-                          className="form-control border-0 shadow-0 p-0"
-                          type="text"
-                          value="1"
-                        />
-                        <button className="inc-btn p-0">
-                          <i className="fas fa-caret-right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-3 pl-sm-0">
-                    <Link
-                      className="btn btn-dark h-100 d-flex align-items-center justify-content-center px-0"
-                      to="/cart"
-                      onClick={() => addToCart(data)}
-                    >
-                      Add to cart
-                    </Link>
-                  </div>
-                </div>
+
                 <div className="text-dark p-0 mb-4 d-inline-block">
                   <i className="far fa-heart me-2"></i>Add to wish list
                 </div>
