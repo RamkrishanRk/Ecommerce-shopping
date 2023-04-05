@@ -6,7 +6,7 @@ import product from "../components/Products";
 
 const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(5);
+  const [recordsPerPage] = useState(25);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = product?.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -56,7 +56,7 @@ const Shop = () => {
       setToShow([...current]);
     }
   };
-  
+
   return (
     <React.Fragment>
       <Layout>

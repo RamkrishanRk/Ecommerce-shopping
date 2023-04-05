@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -20,19 +20,26 @@ const CartDetail = () => {
   const pageData = dataUser?.data?.allUsers;
   const userId = localStorage.getItem("userId");
 
-  let thumbnails = document.getElementsByClassName("thumbnail");
-  let activeImages = document.getElementsByClassName("active");
+  // let thumbnails = document.getElementsByClassName("thumbnail");
+  // let activeImages = document.getElementsByClassName("active");
 
-  for (var i = 0; i < thumbnails.length; i++) {
-    thumbnails[i].addEventListener("mouseover", function () {
-      if (activeImages.length > 0) {
-        activeImages[0].classList.remove("active");
-      }
-      this.classList.add("active");
-      document.getElementById("featured").src = this.src;
-    });
-  }
+  // for (var i = 0; i < thumbnails.length; i++) {
+  //   thumbnails[i].addEventListener("mouseover", function () {
+  //     if (activeImages.length > 0) {
+  //       activeImages[0].classList.remove("active");
+  //     }
+  //     this.classList.add("active");
+  //     document.getElementById("featured").src = this.src;
+  //   });
+  // }
+  // console.log(data?.image, "datadatadata");
 
+  const [activeImage, setActiveImage] = useState(null);
+
+  const handleMouseOver = (event) => {
+    const thumbnail = event.target;
+    setActiveImage(thumbnail.src);
+  };
   return (
     <>
       <Layout>
@@ -44,10 +51,22 @@ const CartDetail = () => {
                   <div className="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
                     <div id="slide-wrapper">
                       <div id="slider">
-                        <img class="thumbnail" src="images/preset1.png" />
-                        <img class="thumbnail" src={data?.image} />
-                        <img class="thumbnail" src="images/preset1.png" />
-                        <img class="thumbnail" src={data?.image} />
+                        <div className="thumbnails">
+                          {data?.image?.map((thumbnail) => (
+                            <img
+                              key={thumbnail}
+                              className={`thumbnail ${
+                                thumbnail === activeImage ? "active" : ""
+                              }`}
+                              src={thumbnail}
+                              onMouseOver={handleMouseOver}
+                            />
+                          ))}
+                        </div>
+                        {/* <img className="thumbnail" src="images/preset1.png" />
+                        <img className="thumbnail" src={data?.image} />
+                        <img className="thumbnail" src="images/preset1.png" />
+                        <img className="thumbnail" src={data?.image} /> */}
                       </div>
                     </div>
                   </div>
@@ -60,7 +79,7 @@ const CartDetail = () => {
                         onClick={() => addToCart(data)}
                       >
                         <i
-                          class="fa fa-shopping-cart me-2 mb-1"
+                          className="fa fa-shopping-cart me-2 mb-1"
                           aria-hidden="true"
                         ></i>
                         Add To Cart
@@ -72,7 +91,7 @@ const CartDetail = () => {
                           state={{ data: data }}
                         >
                           <i
-                            class="fa fa-bolt me-2 mb-1"
+                            className="fa fa-bolt me-2 mb-1"
                             aria-hidden="true"
                           ></i>
                           Buy Now

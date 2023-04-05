@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Add_Card, DecrementItems } from "../redux/actions/card";
 
-const CardsDetails = (props) => {
+const CardsDetails = () => {
   const { id } = useParams();
   const data = useSelector((state) => state?.cartReducer?.carts);
   const [user, setUser] = useState([]);
@@ -54,6 +54,9 @@ const CardsDetails = (props) => {
     const exactDis = (amount * discountPercentage) / 100;
     return Math.round(amount * quantity - exactDis);
   };
+
+  ///////// activeImage
+
   const [activeImage, setActiveImage] = useState(null);
 
   const handleMouseOver = (event) => {
@@ -61,12 +64,6 @@ const CardsDetails = (props) => {
     setActiveImage(thumbnail.src);
   };
 
-  const thumbnails = [
-    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-2.62056b28.jpg",
-    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-1.023bc49d.jpg",
-    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-2.62056b28.jpg",
-    "https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/product-detail-1.023bc49d.jpg",
-  ];
   return (
     <>
       <Layout>
@@ -83,7 +80,7 @@ const CardsDetails = (props) => {
                             <div id="slide-wrapper">
                               <div id="slider">
                                 <div className="thumbnails">
-                                  {thumbnails.map((thumbnail) => (
+                                  {item?.image?.map((thumbnail) => (
                                     <img
                                       key={thumbnail}
                                       className={`thumbnail ${
@@ -100,12 +97,10 @@ const CardsDetails = (props) => {
                             </div>
                           </div>
                           <div className="col-sm-10 order-1 order-sm-2">
-                            <div>
-                              <img
-                                id="featured"
-                                src={activeImage || thumbnails[0]}
-                              />
-                            </div>
+                            <img
+                              id="featured"
+                              src={activeImage || item?.image}
+                            />
                           </div>
                         </div>
                       </div>
