@@ -8,7 +8,7 @@ export const loginUser =
     var body = JSON.stringify({
       email,
       password,
-      passwordConfirm: password,
+      position: "user",
     });
     const config = {
       headers: {
@@ -50,6 +50,7 @@ export const signupUser =
       email,
       password,
       passwordConfirm: password,
+      position: "user",
     });
 
     let config = {
@@ -75,7 +76,7 @@ export const signupUser =
         }, 2000);
       }
     } catch (error) {
-      toast.error(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.message);
       dispatch({
         type: SIGNUP_FAIL,
       });

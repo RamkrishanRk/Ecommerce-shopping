@@ -16,7 +16,7 @@ const OrderList = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8500/api/v1/payment/get-order", requestOptions)
+    fetch("http://localhost:8000/api/v1/payment/get-order", requestOptions)
       .then((response) => response.json())
       .then((result) => setData(result?.result?.orders?.items))
       .catch((error) => console.log("error", error));

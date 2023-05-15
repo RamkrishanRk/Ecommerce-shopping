@@ -12,12 +12,12 @@ const CartDetail = () => {
   const addToCart = (e) => {
     dispatch(Add_Card(e));
   };
-  const dataUser = useSelector((state) => state?.userReducer?.user);
+  const dataUser = useSelector((state) => state?.userReducer?.form);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
-  const pageData = dataUser?.data?.allUsers;
+  // const pageData = dataUser?.data?.allUsers;
   const userId = localStorage.getItem("userId");
 
   // let thumbnails = document.getElementsByClassName("thumbnail");
@@ -63,15 +63,11 @@ const CartDetail = () => {
                             />
                           ))}
                         </div>
-                        {/* <img className="thumbnail" src="images/preset1.png" />
-                        <img className="thumbnail" src={data?.image} />
-                        <img className="thumbnail" src="images/preset1.png" />
-                        <img className="thumbnail" src={data?.image} /> */}
                       </div>
                     </div>
                   </div>
                   <div className="col-sm-10 order-1 order-sm-2">
-                    <img id="featured" src={data?.image} />
+                    <img id="featured" src={activeImage || data?.image} />
                     <div className="addcart-btn mt-3">
                       <Link
                         className="btn btn-dark"
@@ -124,9 +120,9 @@ const CartDetail = () => {
                     <i className="fas fa-star small text-warning"></i>
                   </li>
                 </ul>
-                <h1>{data?.title}</h1>
+                <h1 className="fs-3">{data?.title}</h1>
                 <p className="text-muted lead">₹{(data?.qnty, data?.price)}</p>
-                <p className="text-sm mb-4">{data?.description}</p>
+                <p className="mb-4">{data?.description}</p>
 
                 <div className="text-dark p-0 mb-4 d-inline-block">
                   <i className="far fa-heart me-2"></i>Add to wish list

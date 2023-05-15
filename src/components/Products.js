@@ -132,14 +132,17 @@
 // ];
 const products = [
   {
-    id: 2,
-    title: "Awesome Plastic Hat",
-    price: 200,
-    description: "The Football Is Good For Training And Recreational Purposes",
+    id: 1,
+    title:
+      "Redmi A1 (Black, 2GB RAM, 32GB Storage) | Segment Best AI Dual Cam | 5000mAh Battery | Leather Texture Design | Android 12",
+    price: 5899,
+    description:
+      "Display: 16.56cm HD+ Scratch resistant display  MediaTek Helio A22 processor; up to 2.0GHz 8MP Dual camera | 5MP Front camera",
     image: [
-      "https://api.lorem.space/image/watch?w=640&h=480&r=3952",
-      "https://api.lorem.space/image/watch?w=640&h=480&r=2334",
-      "https://api.lorem.space/image/watch?w=640&h=480&r=9278",
+      "https://m.media-amazon.com/images/I/81BxHYjeA2L._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81g6LeaKxnL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81hpxBIYQVL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81fwie0wBfL._SX679_.jpg",
     ],
   },
 ];

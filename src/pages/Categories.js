@@ -7,9 +7,7 @@ import { toast } from "react-toastify";
 
 const Categories = () => {
   const dispatch = useDispatch();
-
   const [data, setData] = useState(products);
-
   const cartData = useSelector((state) => state?.cartReducer?.carts);
 
   const addToCart = (e) => {
@@ -32,8 +30,8 @@ const Categories = () => {
           {data
             ? data?.map((item, index) => {
                 return (
-                  <>
-                    <div className="col-xl-3 col-lg-4 col-sm-6" key={index}>
+                  <React.Fragment key={index}>
+                    <div className="col-xl-3 col-lg-4 col-sm-6">
                       <div className="product text-center">
                         <div className="position-relative mb-3">
                           <div className="badge text-white bg-"></div>
@@ -94,12 +92,20 @@ const Categories = () => {
                             </ul>
                           </div>
                         </div>
-
-                        <h5 className="reset-anchor">{item.title}</h5>
+                        <h5
+                          className="reset-anchor"
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {item.title}
+                        </h5>
                         <p className="small text-muted"> ₹{item.price}</p>
                       </div>
                     </div>
-                  </>
+                  </React.Fragment>
                 );
               })
             : ""}

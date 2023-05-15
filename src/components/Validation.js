@@ -28,7 +28,6 @@ export const DeliveryAddress = Yup.object().shape({
     .matches(phoneRegExp, "phone number is not valid")
     .min(10, "too short")
     .max(10, "too long"),
-  companyName: Yup.string().required("Enter your company name"),
   country: Yup.string().required("Enter your country"),
   address: Yup.string().required("Enter your address"),
   zip: Yup.string().required("Enter your zip"),

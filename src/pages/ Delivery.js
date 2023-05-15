@@ -5,13 +5,13 @@ import Layout from "../components/Layout";
 import useRazorpay from "react-razorpay";
 import shortid from "shortid";
 import { getUsers } from "../redux/actions/users";
+import React from "react";
 
 const Delivery = () => {
   const items = JSON.parse(localStorage.getItem("payment-details"));
   const token = localStorage.getItem("token");
   const viewCarted = useSelector((state) => state?.cartReducer?.carts);
   const user_details = useSelector((state) => state?.userReducer?.user);
-
   const [page, setPage] = useState("");
   const location = useLocation();
   const data = location.state || {};
@@ -44,7 +44,7 @@ const Delivery = () => {
         body: raw,
       };
 
-      fetch("http://localhost:8500/api/v1/payment/create-order", requestOptions)
+      fetch("http://localhost:8000/api/v1/payment/create-order", requestOptions)
         .then((response) => response.json())
         .then((result) => setOrderData(result));
     } catch (err) {
@@ -106,7 +106,7 @@ const Delivery = () => {
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
-  const userData = user_details?.data?.allUsers;
+  const userData = user_details?.data?.allForm;
 
   return (
     <>
@@ -138,13 +138,13 @@ const Delivery = () => {
                     <div>
                       <>
                         <span className="name-section">
-                          {userData?.[1]?.userName}
+                          {userData?.[0]?.userName}
                         </span>
                         <span className="phone-section ms-2">
-                          {userData?.[1]?.city} {userData?.[1]?.state}{" "}
-                          {userData?.[1]?.address} -{userData?.[1]?.zip} Phone
+                          {userData?.[0]?.city} {userData?.[0]?.state}{" "}
+                          {userData?.[0]?.address} -{userData?.[0]?.zip} Phone
                           number:
-                          {userData?.[1]?.phone}
+                          {userData?.[0]?.phone}
                         </span>
                       </>
                     </div>
@@ -186,7 +186,7 @@ const Delivery = () => {
                         viewCarted ? (
                           viewCarted?.map((e) => {
                             return (
-                              <>
+                              <React.Fragment key={e.id}>
                                 <div className="d-flex">
                                   <img
                                     src={e?.image}
@@ -202,7 +202,7 @@ const Delivery = () => {
                                   {e.id == true}
                                   <p> ₹{e?.price}</p>
                                 </div>
-                              </>
+                              </React.Fragment>
                             );
                           })
                         ) : null
@@ -323,12 +323,12 @@ const Delivery = () => {
                   </h4>
                   <div className="login-payment-section">
                     <h5>Payment Options</h5>
-                    <p> ₹{data?.data?.price}</p>
+                    <p> ₹{viewCarted?.[0]?.price}</p>
                   </div>
                 </div>
                 <div className="float-end">
                   <button
-                    onClick={() => createOrder(data?.data?.price)}
+                    onClick={() => createOrder(viewCarted?.[0]?.price)}
                     className="btn btn-success _2KpZ6l _1seccl _3AWRsL"
                   >
                     Pay with Razorpay

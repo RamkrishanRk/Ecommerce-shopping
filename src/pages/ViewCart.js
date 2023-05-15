@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Add_Card, DecrementItems, DeleteItems } from "../redux/actions/card";
-// import ScratchCard from "react-scratch-coupon";
+import ScratchCard from "react-scratch-coupon";
 import { v4 } from "uuid";
 
 const ViewCart = () => {
@@ -190,7 +190,16 @@ const ViewCart = () => {
                                         }}
                                       />
                                     </Link>
-                                    <div className="ms-3">
+                                    <div
+                                      className="ms-3"
+                                      style={{
+                                        width: "225px",
+                                        overflowX: "auto",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                      }}
+                                    >
                                       <strong className="h6">
                                         <Link
                                           className="reset-anchor animsition-link"

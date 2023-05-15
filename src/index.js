@@ -20,7 +20,17 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer
+        position="top-center"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        autoClose={2000}
+      />
       <PersistGate persistor={persistor}>
         <Elements stripe={stripePromise}>
           <App />

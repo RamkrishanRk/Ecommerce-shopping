@@ -24,7 +24,7 @@ export const Add_Users = (item) => async (dispatch) => {
   };
   try {
     const response = await axios.post(
-      `http://localhost:8500/api/v1/users`,
+      `http://localhost:8000/api/v1/form`,
       data,
       config
     );
@@ -54,7 +54,7 @@ export const getUsers = () => async (dispatch) => {
   };
   try {
     const response = await axios.get(
-      `http://localhost:8500/api/v1/users`,
+      `http://localhost:8000/api/v1/form`,
       config
     );
     dispatch({

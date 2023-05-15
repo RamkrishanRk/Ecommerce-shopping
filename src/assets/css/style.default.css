@@ -4336,6 +4336,8 @@ fieldset:disabled .btn {
   }
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
+    left: -8.5rem;
+
   }
   .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0.5rem;
@@ -10871,7 +10873,7 @@ button:focus, button:active {
   border-bottom: 0.5rem solid #dcb14a;
   position: absolute;
   top: -0.55rem;
-  left: 1rem;
+  left: 13rem;
 }
 
 .navbar .nav-link {

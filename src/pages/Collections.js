@@ -12,39 +12,39 @@ const Collections = () => {
         </header>
         <div className="row">
           <div className="col-md-4">
-            <Link className="category-item" to="/">
+            <Link className="category-item" to="/shoping">
               <img
                 className="img-fluid"
                 src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/cat-img-1.7570d55a.jpg"
-                alt=""
+                alt="d19m59y37dris4"
               />
               <strong className="category-item-title">Clothes</strong>
             </Link>
           </div>
           <div className="col-md-4">
-            <Link className="category-item mb-4" to="/">
+            <Link className="category-item mb-4" to="/shoping">
               <img
                 className="img-fluid"
                 src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/cat-img-2.1b2e51d9.jpg"
-                alt=""
+                alt="boutique"
               />
               <strong className="category-item-title">Shoes</strong>
             </Link>
-            <Link className="category-item" to="/">
+            <Link className="category-item" to="/shoping">
               <img
                 className="img-fluid"
                 src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/cat-img-3.49411dee.jpg"
-                alt=""
+                alt="img"
               />
               <strong className="category-item-title">Watches</strong>
             </Link>
           </div>
           <div className="col-md-4">
-            <Link className="category-item" to="/">
+            <Link className="category-item" to="/shoping">
               <img
                 className="img-fluid"
                 src="https://d19m59y37dris4.cloudfront.net/boutique/2-0/img/cat-img-4.5db5d5ec.jpg"
-                alt=""
+                alt="cloudfront"
               />
               <strong className="category-item-title">Electronics</strong>
             </Link>

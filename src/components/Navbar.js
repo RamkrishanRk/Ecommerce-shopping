@@ -1,16 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const data = useSelector((state) => state?.cartReducer?.carts);
 
   const token = localStorage?.getItem("token");
   const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+  const splitLocation = pathname.split("/");
+
   const logouthandler = () => {
-    localStorage.removeItem("token");
-    navigate("/");
+    setTimeout(() => {
+      toast.success("You have been successfully logged out");
+      navigate("/");
+      localStorage.removeItem("token");
+    }, 2000);
   };
+
   return (
     <>
       <header className="header bg-white">
@@ -57,12 +66,18 @@ const Navbar = () => {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto">
-                <li className="nav-item">
-                  <Link className="nav-link active" to="/">
+                <li
+                  className={splitLocation[1] === "" ? "nav-item active" : ""}
+                >
+                  <Link className="nav-link" to="/">
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    splitLocation[1] === "shoping" ? "nav-item active" : ""
+                  }
+                >
                   <Link className="nav-link" to="/shoping">
                     Shop
                   </Link>
@@ -116,7 +131,11 @@ const Navbar = () => {
                 </li>
               </ul>
               <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
+                <li
+                  className={
+                    splitLocation[1] === "cart" ? "nav-item active" : ""
+                  }
+                >
                   <Link to="/cart" className="nav-link">
                     <i className="fas fa-dolly-flatbed me-1 text-gray"></i>Cart
                     <small className="text-gray fw-normal">
@@ -131,6 +150,55 @@ const Navbar = () => {
                   </Link>
                 </li>
                 {token ? (
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      id="pagesDropdown"
+                      to="#"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i className="fas fa-user me-1 text-gray fw-normal"></i>
+                      Profile
+                    </Link>
+                    <div
+                      className="dropdown-menu mt-3 shadow-sm"
+                      aria-labelledby="pagesDropdown"
+                    >
+                      <Link
+                        className="dropdown-item border-0 transition-link"
+                        to="/"
+                      >
+                        My Profile
+                      </Link>
+                      <hr className="dropdown-divider my-2" />
+                      <Link
+                        className="dropdown-item border-0 transition-link"
+                        to="#"
+                        onClick={logouthandler}
+                      >
+                        Sign Out
+                      </Link>
+                    </div>
+                  </li>
+                ) : (
+                  <li
+                    className={
+                      splitLocation[1] === "login" ? "nav-item active" : ""
+                    }
+                  >
+                    <Link
+                      className="nav-link d-flex align-items-center"
+                      to="/login"
+                    >
+                      <i className="fas fa-user me-1 text-gray fw-normal"></i>{" "}
+                      Login
+                    </Link>
+                  </li>
+                )}
+
+                {/* {token ? (
                   <li className="nav-item">
                     <Link
                       className="nav-link d-flex align-items-center"
@@ -142,7 +210,11 @@ const Navbar = () => {
                     </Link>
                   </li>
                 ) : (
-                  <li className="nav-item">
+                  <li
+                    className={
+                      splitLocation[1] === "login" ? "nav-item active" : ""
+                    }
+                  >
                     <Link
                       className="nav-link d-flex align-items-center"
                       to="/login"
@@ -151,7 +223,7 @@ const Navbar = () => {
                       Login
                     </Link>
                   </li>
-                )}
+                )} */}
               </ul>
             </div>
           </nav>

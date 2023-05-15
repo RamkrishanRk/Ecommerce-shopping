@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { useLocation } from "react-router-dom";
 import { Formik } from "formik";
@@ -10,6 +10,12 @@ const Checkout = () => {
   const location = useLocation();
   const data = location.state?.data;
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("persist:root"));
+  const [formData, setFormData] = useState(null);
+  console.log(formData, "formData");
+  useEffect(() => {
+    localStorage.removeItem(JSON.parse(user?.userReducer));
+  });
   return (
     <>
       <Layout>
@@ -34,6 +40,7 @@ const Checkout = () => {
                 validateOnChange={false}
                 validateOnBlur={false}
                 onSubmit={(values) => {
+                  setFormData(values);
                   dispatch(Add_Users(values));
                 }}
               >
@@ -93,7 +100,7 @@ const Checkout = () => {
                         <select
                           className="form-control rounded-0"
                           name="country"
-                          defaultValue={values.country}
+                          value={values.country}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         >
@@ -490,7 +497,7 @@ const Checkout = () => {
                         <select
                           className="form-control"
                           name="state"
-                          defaultValue={values.state}
+                          value={values.state}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         >

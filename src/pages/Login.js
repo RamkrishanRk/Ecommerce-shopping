@@ -15,7 +15,10 @@ const Login = () => {
           <div className="login-form">
             <h2>Sign in to your account</h2>
             <Formik
-              initialValues={{ email: "", password: "", passwordConfirm: "" }}
+              initialValues={{
+                email: "",
+                password: "",
+              }}
               validationSchema={SigninSchema}
               validateOnChange={false}
               validateOnBlur={false}
