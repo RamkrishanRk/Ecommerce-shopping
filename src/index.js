@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../src/assets/css/swiper-bundle.min.css";
 import "../src/assets/css/style.default.css";
-import "../src/assets/js/bootstrap.bundle.min.js";
 
 const apiKey = `${process.env.REACT_APP_TITLE}`;
 const stripePromise = loadStripe(apiKey);

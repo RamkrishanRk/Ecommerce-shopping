@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ADD_USERS, GET_USERS } from "./type";
+import { API_URL } from "./config";
 
 export const Add_Users = (item) => async (dispatch) => {
   let data = JSON.stringify({
@@ -23,11 +24,7 @@ export const Add_Users = (item) => async (dispatch) => {
     },
   };
   try {
-    const response = await axios.post(
-      `http://localhost:8000/api/v1/form`,
-      data,
-      config
-    );
+    const response = await axios.post(`${API_URL}/api/v1/users`, data, config);
     if (response?.data?.status === "success") {
       toast.success(response?.data.message);
       setTimeout(() => {
@@ -53,10 +50,7 @@ export const getUsers = () => async (dispatch) => {
     },
   };
   try {
-    const response = await axios.get(
-      `http://localhost:8000/api/v1/form`,
-      config
-    );
+    const response = await axios.get(`${API_URL}/api/v1/users`, config);
     dispatch({
       type: GET_USERS,
       payload: response?.data,
